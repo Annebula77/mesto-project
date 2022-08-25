@@ -1,0 +1,9 @@
+.element__like {
+  min-width: 22px;
+}
+
+.element__like:hover {
+  opacity: 0.5;
+  transition: ease;
+  transition-duration: 0.5s;
+}

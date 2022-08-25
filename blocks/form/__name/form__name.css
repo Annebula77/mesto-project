@@ -1,0 +1,22 @@
+.form__name {
+  box-sizing: border-box;
+  font-style: inherit;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 1.21;
+  padding-top: 34px;
+  padding-left: 36px;
+  padding-right: 64px;
+  padding-bottom: 0;
+  margin: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .form__name {
+    font-size: 18px;
+    padding-top: 25px;
+    padding-left: 22px;
+    padding-right: 22px;
+    padding-bottom: 0;
+  }
+}

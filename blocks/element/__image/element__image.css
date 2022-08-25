@@ -1,0 +1,29 @@
+.element__image {
+  max-width: 282px;
+  min-height: 282px;
+  max-height: 282px;
+}
+
+@media screen and (max-width: 887px) {
+  .element__image {
+    max-width: 400px;
+    min-height: 400px;
+    max-height: 400px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .element__image {
+    max-width: 332px;
+    min-height: 332px;
+    max-height: 332px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .element__image {
+    max-width: 282px;
+    min-height: 282px;
+    max-height: 282px;
+  }
+}

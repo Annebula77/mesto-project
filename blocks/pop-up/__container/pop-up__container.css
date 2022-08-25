@@ -1,0 +1,18 @@
+.pop-up__container {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+  min-width: 462px;
+  padding: 0;
+  margin: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .pop-up__container {
+    flex-direction: column-reverse;
+    align-items: flex-end;
+    min-width: 282px;
+    margin: 0 19px 0;
+  }
+}

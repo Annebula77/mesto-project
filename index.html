@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mesto</title>
+    <link rel="stylesheet" href="./pages/index.css" />
+  </head>
+  <body class="page">
+    <header class="header">
+      <img class="header__logo" src="./Images/logo.png" alt="логотип" />
+      <img class="header__line" src="./Images/Line.png" alt="линия" />
+    </header>
+    <main class="content">
+      <section class="profile" aria-label="profile">
+        <img class="profile__avatar" src="./Images/avatar.jpg" alt="аватар" />
+        <div class="profile__data">
+          <h1 class="profile__title">Жак-Ив Кусто</h1>
+          <p class="profile__subtitle">Исследователь океана</p>
+        </div>
+        <button class="button button__data-change"></button>
+        <button class="button button__add"></button>
+      </section>
+      <section class="elements" aria-label="элементы">
+        <div class="element">
+          <img
+            class="element__image"
+            src="./Images/Karachaevsk.jpg"
+            alt="Карачаевск"
+          />
+          <div class="elememt__compaunds">
+            <h2 class="element__title">Карачаево-Черкессия</h2>
+            <img
+              class="element__like element__like_active"
+              src="./Images/heart.svg"
+              alt="like"
+            />
+          </div>
+        </div>
+        <div class="element">
+          <img class="element__image" src="./Images/Elbrus.jpg" alt="Эльбрус" />
+          <div class="elememt__compaunds">
+            <h2 class="element__title">Гора Эльбрус</h2>
+            <img
+              class="element__like element__like_active"
+              src="./Images/heart.svg"
+              alt="like"
+            />
+          </div>
+        </div>
+        <div class="element">
+          <img class="element__image" src="./Images/Dombay.jpg" alt="Домбай" />
+          <div class="elememt__compaunds">
+            <h2 class="element__title">Домбай</h2>
+            <img
+              class="element__like element__like_active"
+              src="./Images/heart.svg"
+              alt="like"
+            />
+          </div>
+        </div>
+        <div class="element">
+          <img
+            class="element__image"
+            src="./Images/Ostrov_Olkhon.jpg"
+            alt="Ольхон"
+          />
+          <div class="elememt__compaunds">
+            <h2 class="element__title">Остров Ольхон</h2>
+            <img
+              class="element__like element__like_active"
+              src="./Images/heart.svg"
+              alt="like"
+            />
+          </div>
+        </div>
+        <div class="element">
+          <img
+            class="element__image"
+            src="./Images/Shantarskie-ostrova.jpg"
+            alt="Шантарские острова"
+          />
+          <div class="elememt__compaunds">
+            <h2 class="element__title">Шантарские Острова</h2>
+            <img
+              class="element__like element__like_active"
+              src="./Images/heart.svg"
+              alt="like"
+            />
+          </div>
+        </div>
+        <div class="element">
+          <img class="element__image" src="./Images/Yakutia.jpg" alt="Якутия" />
+          <div class="elememt__compaunds">
+            <h2 class="element__title">Якутия</h2>
+            <img
+              class="element__like element__like_active"
+              src="./Images/heart.svg"
+              alt="like"
+            />
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+      <p class="footer_copyright">© 2020 Mesto Russia</p>
+    </footer>
+    <section class="pop-up pop-up_opened" aria-label="pop-up">
+      <div class="pop-up__container">
+        <div class="pop-up__form-background">
+          <form class="form">
+            <div class="form__container">
+              <h1 class="form__name">Редактировать профиль</h1>
+              <fieldset class="form__person form__person-ctrl-text">
+                <input
+                  type="text"
+                  class="form__input form__input-text"
+                  name="fullname"
+                  value="Жак-Ив Кусто"
+                  id="form__person"
+                  required
+                />
+              </fieldset>
+              <fieldset class="form__occupation form__occupation-ctrl-text">
+                <input
+                  type="text"
+                  class="form__input form__input-text"
+                  name="occupation"
+                  value="Исследователь океана"
+                  id="form__occpation"
+                  required
+                />
+              </fieldset>
+            </div>
+            <fieldset class="form__handlers">
+              <button class="form__button">Сохранить</button>
+            </fieldset>
+          </form>
+        </div>
+        <img class="pop-up__close-icon" src="./Images/CloseIcon.png" alt="x" />
+      </div>
+    </section>
+  </body>
+</html>

@@ -1,0 +1,23 @@
+.form__button {
+  display: block;
+  box-sizing: border-box;
+  width: 358px;
+  height: 50px;
+  background-color: black;
+  color: white;
+  padding: 0;
+  margin: 48px 0 37px;
+}
+.form__button:hover {
+  opacity: 0.8;
+  transition: ease;
+  transition-duration: 0.5s;
+}
+
+@media screen and (max-width: 768px) {
+  .form__button {
+    width: 238px;
+    height: 46px;
+    margin: 45px 0 25px;
+  }
+}

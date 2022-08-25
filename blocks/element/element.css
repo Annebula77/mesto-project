@@ -1,0 +1,31 @@
+.element {
+  box-sizing: border-box;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 32%;
+  max-width: 282px;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 887px) {
+  .element {
+    width: 45%;
+    max-width: 400px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .element {
+    width: unset;
+    max-width: 332px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .element {
+    max-width: 282px;
+  }
+}
