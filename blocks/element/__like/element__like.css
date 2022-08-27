@@ -1,5 +1,7 @@
 .element__like {
+  box-sizing: border-box;
   min-width: 22px;
   border: none;
   background-color: white;
+  padding: 0;
 }

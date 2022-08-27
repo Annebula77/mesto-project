@@ -18,7 +18,7 @@
 }
 
 @media screen and (max-width: 768px) {
-  .button__data-change {
+  .profile__data-change {
     width: 18px;
     height: 18px;
     background-size: 7.5px 7.5px;

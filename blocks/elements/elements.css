@@ -7,12 +7,3 @@
   width: 100%;
   max-width: 880px;
 }
-
-@media screen and (max-width: 320px) {
-  .elements {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-  }
-}

@@ -5,10 +5,14 @@
   border: none;
   width: 358px;
   height: 50px;
+  font-family: "Inter";
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.22;
   background-color: black;
   color: white;
   padding: 0;
-  margin: 48px 0 37px;
+  margin: 0;
 }
 .form__button:hover {
   opacity: 0.8;
@@ -20,6 +24,7 @@
   .form__button {
     width: 238px;
     height: 46px;
-    margin: 45px 0 25px;
+    font-size: 14px;
+    line-height: 1.21;
   }
 }

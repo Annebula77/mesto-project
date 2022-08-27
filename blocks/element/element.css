@@ -2,16 +2,11 @@
   box-sizing: border-box;
   border-radius: 10px;
   display: grid;
-  grid-template-columns: minmax(auto-fit, 1fr);
-  grid-template-rows: minmax(min-content, max-content);
+  grid-template-columns: minmax(1fr);
+  grid-template-rows: 282px min-content;
+  /* спасибо!*/
   padding: 0;
   margin: 0;
   gap: 0;
   overflow: hidden;
-}
-
-@media screen and (max-width: 320px) {
-  .element {
-    grid-template-columns: 282px;
-  }
 }

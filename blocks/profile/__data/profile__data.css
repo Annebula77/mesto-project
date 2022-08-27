@@ -1,10 +1,9 @@
 .profile__data {
   box-sizing: border-box;
   display: grid;
-  grid-template-columns: repeat(2, minmax(294px, max-content));
-  grid-template-rows: repeat(2, minmax(min-content, max-content));
+  grid-template-columns: repeat(2, minmax(294px, auto));
   column-gap: 18px;
-  row-gap: 16px;
+  row-gap: 8px;
   min-width: 294px;
   padding-top: 0;
   padding-left: 30px;
@@ -31,7 +30,8 @@
 
 @media screen and (max-width: 320px) {
   .profile__data {
-    padding-top: 26px;
+    padding-top: 22px;
+    /* у меня по макету отступ от элипса аватара до текста 26px, а то что я указала сейчас до границ jpg, которых не видно*/
     padding-bottom: 36px;
   }
 }

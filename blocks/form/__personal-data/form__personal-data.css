@@ -8,7 +8,7 @@
 }
 
 @media screen and (max-width: 768px) {
-  .form__person {
+  .form__personal-data {
     padding: 0 22px 0;
   }
 }

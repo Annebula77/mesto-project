@@ -7,6 +7,9 @@
   background-size: 22px 22px;
   background-color: #000000;
   border: 2px solid white;
+  border-radius: 2px;
+  margin-left: auto;
+  /* спасибо!*/
 }
 
 .profile__add:hover {
@@ -19,5 +22,6 @@
   .profile__add {
     width: 282px;
     background-size: 17px 17px;
+    margin-left: 0;
   }
 }
