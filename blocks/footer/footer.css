@@ -1,17 +1,11 @@
 .footer {
   display: flex;
   justify-content: flex-start;
-  width: 69%;
+  width: 100%;
   max-width: 880px;
   box-sizing: border-box;
   padding: 67px 0 60px;
   margin: 0;
-}
-
-@media screen and (max-width: 1024px) {
-  .footer {
-    width: 98%;
-  }
 }
 
 @media screen and (max-width: 768px) {
@@ -21,18 +15,9 @@
   }
 }
 
-@media screen and (max-width: 685px) {
-  .footer {
-    width: 90%;
-    justify-content: center;
-  }
-}
-
 @media screen and (max-width: 320px) {
   .footer {
-    width: 100%;
     max-width: 320px;
     padding: 48px 0 36px;
-    justify-content: flex-start;
   }
 }

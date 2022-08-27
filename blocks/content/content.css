@@ -2,7 +2,7 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  width: 69%;
+  width: 100%;
   max-width: 880px;
   padding: 0;
   margin: 0;
@@ -10,27 +10,19 @@
 
 @media screen and (max-width: 1024px) {
   .content {
-    width: 98%;
+    padding: 0 19px 0;
   }
 }
 
 @media screen and (max-width: 768px) {
   .content {
-    width: 88%;
     max-width: 680px;
-  }
-}
-
-@media screen and (max-width: 685px) {
-  .content {
-    width: 90%;
-    align-items: center;
   }
 }
 
 @media screen and (max-width: 320px) {
   .content {
-    width: 100%;
     max-width: 320px;
+    padding: 0;
   }
 }

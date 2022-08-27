@@ -1,6 +1,8 @@
 .form__handlers {
+  display: flex;
   box-sizing: border-box;
   border: none;
+  justify-content: center;
   padding: 0;
   margin: 0;
 }

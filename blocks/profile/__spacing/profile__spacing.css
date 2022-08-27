@@ -1,0 +1,21 @@
+.profile__spacing {
+  display: flex;
+  width: 45%;
+  max-width: 393px;
+  box-sizing: border-box;
+  justify-content: flex-end;
+  margin: 0;
+  padding: 0;
+}
+
+@media screen and (max-width: 786px) {
+  .profile__spacing {
+    width: 80%;
+    justify-content: center;
+  }
+}
+@media screen and (max-width: 320px) {
+  .profile__spacing {
+    width: 100%;
+  }
+}

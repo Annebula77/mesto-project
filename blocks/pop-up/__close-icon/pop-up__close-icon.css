@@ -1,21 +1,11 @@
 .pop-up__close-icon {
-  display: flex;
   width: 32px;
   height: 32px;
-  margin: -40px 0 0;
-}
-
-.pop-up__close-icon:hover {
-  opacity: 0.6;
-  transition: ease;
-  transition-duration: 0.5s;
 }
 
 @media screen and (max-width: 768px) {
   .pop-up__close-icon {
     width: 20px;
     height: 20px;
-    padding: 0 0 16px;
-    margin: 0;
   }
 }

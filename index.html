@@ -8,137 +8,127 @@
   </head>
   <body class="page">
     <header class="header">
-      <img class="header__logo" src="./Images/logo.png" alt="логотип" />
-      <img class="header__line" src="./Images/Line.png" alt="линия" />
+      <img class="header__logo" src="./images/logo.svg" alt="логотип" />
     </header>
     <main class="content">
       <section class="profile" aria-label="profile">
-        <img class="profile__avatar" src="./Images/avatar.jpg" alt="аватар" />
+        <img class="profile__avatar" src="./images/avatar.jpg" alt="аватар" />
         <div class="profile__data">
-          <h1 class="profile__title">Жак-Ив Кусто</h1>
+          <h2 class="profile__title">Жак-Ив Кусто</h2>
+          <button class="button profile__data-change" type="button"></button>
           <p class="profile__subtitle">Исследователь океана</p>
         </div>
-        <button class="button button__data-change"></button>
-        <button class="button button__add"></button>
+        <div class="profile__spacing">
+          <button class="button profile__add" type="button"></button>
+        </div>
       </section>
       <section class="elements" aria-label="элементы">
         <div class="element">
           <img
             class="element__image"
-            src="./Images/Karachaevsk.jpg"
+            src="./images/Karachaevsk.jpg"
             alt="Карачаевск"
           />
-          <div class="elememt__compaunds">
+          <div class="element__compaunds">
             <h2 class="element__title">Карачаево-Черкессия</h2>
-            <img
-              class="element__like element__like_active"
-              src="./Images/heart.svg"
-              alt="like"
-            />
+            <button class="element__like element__like_active" type="button">
+              <img class="element__icon" src="./images/heart.svg" alt="like" />
+            </button>
           </div>
         </div>
         <div class="element">
-          <img class="element__image" src="./Images/Elbrus.jpg" alt="Эльбрус" />
-          <div class="elememt__compaunds">
+          <img class="element__image" src="./images/Elbrus.jpg" alt="Эльбрус" />
+          <div class="element__compaunds">
             <h2 class="element__title">Гора Эльбрус</h2>
-            <img
-              class="element__like element__like_active"
-              src="./Images/heart.svg"
-              alt="like"
-            />
+            <button class="element__like element__like_active" type="button">
+              <img class="element__icon" src="./images/heart.svg" alt="like" />
+            </button>
           </div>
         </div>
         <div class="element">
-          <img class="element__image" src="./Images/Dombay.jpg" alt="Домбай" />
-          <div class="elememt__compaunds">
+          <img class="element__image" src="./images/Dombay.jpg" alt="Домбай" />
+          <div class="element__compaunds">
             <h2 class="element__title">Домбай</h2>
-            <img
-              class="element__like element__like_active"
-              src="./Images/heart.svg"
-              alt="like"
-            />
+            <button class="element__like element__like_active" type="button">
+              <img class="element__icon" src="./images/heart.svg" alt="like" />
+            </button>
           </div>
         </div>
         <div class="element">
           <img
             class="element__image"
-            src="./Images/Ostrov_Olkhon.jpg"
+            src="./images/Ostrov_Olkhon.jpg"
             alt="Ольхон"
           />
-          <div class="elememt__compaunds">
+          <div class="element__compaunds">
             <h2 class="element__title">Остров Ольхон</h2>
-            <img
-              class="element__like element__like_active"
-              src="./Images/heart.svg"
-              alt="like"
-            />
+            <button class="element__like element__like_active" type="button">
+              <img class="element__icon" src="./images/heart.svg" alt="like" />
+            </button>
           </div>
         </div>
         <div class="element">
           <img
             class="element__image"
-            src="./Images/Shantarskie-ostrova.jpg"
+            src="./images/Shantarskie-ostrova.jpg"
             alt="Шантарские острова"
           />
-          <div class="elememt__compaunds">
+          <div class="element__compaunds">
             <h2 class="element__title">Шантарские Острова</h2>
-            <img
-              class="element__like element__like_active"
-              src="./Images/heart.svg"
-              alt="like"
-            />
+            <button class="element__like element__like_active" type="button">
+              <img class="element__icon" src="./images/heart.svg" alt="like" />
+            </button>
           </div>
         </div>
         <div class="element">
-          <img class="element__image" src="./Images/Yakutia.jpg" alt="Якутия" />
-          <div class="elememt__compaunds">
+          <img class="element__image" src="./images/Yakutia.jpg" alt="Якутия" />
+          <div class="element__compaunds">
             <h2 class="element__title">Якутия</h2>
-            <img
-              class="element__like element__like_active"
-              src="./Images/heart.svg"
-              alt="like"
-            />
+            <button class="element__like element__like_active" type="button">
+              <img class="element__icon" src="./images/heart.svg" alt="like" />
+            </button>
           </div>
         </div>
       </section>
     </main>
     <footer class="footer">
-      <p class="footer_copyright">© 2020 Mesto Russia</p>
+      <p class="footer__copyright">© 2020 Mesto Russia</p>
     </footer>
-    <section class="pop-up pop-up_opened" aria-label="pop-up">
+    <div class="pop-up">
       <div class="pop-up__container">
-        <div class="pop-up__form-background">
-          <form class="form">
-            <div class="form__container">
-              <h1 class="form__name">Редактировать профиль</h1>
-              <fieldset class="form__person form__person-ctrl-text">
-                <input
-                  type="text"
-                  class="form__input form__input-text"
-                  name="fullname"
-                  value="Жак-Ив Кусто"
-                  id="form__person"
-                  required
-                />
-              </fieldset>
-              <fieldset class="form__occupation form__occupation-ctrl-text">
-                <input
-                  type="text"
-                  class="form__input form__input-text"
-                  name="occupation"
-                  value="Исследователь океана"
-                  id="form__occpation"
-                  required
-                />
-              </fieldset>
-            </div>
-            <fieldset class="form__handlers">
-              <button class="form__button">Сохранить</button>
-            </fieldset>
-          </form>
-        </div>
-        <img class="pop-up__close-icon" src="./Images/CloseIcon.png" alt="x" />
+        <form name="personal-data" class="form">
+          <!--пишут, что тег name устарел, нужно использовать id-->
+          <h1 class="form__name">Редактировать профиль</h1>
+          <fieldset class="form__personal-data">
+            <input
+              type="text"
+              class="form__input"
+              name="fullname"
+              value="Жак-Ив Кусто"
+              id="form__person"
+              required
+            />
+            <input
+              type="text"
+              class="form__input"
+              name="occupation"
+              value="Исследователь океана"
+              id="form__occupation"
+              required
+            />
+          </fieldset>
+          <fieldset class="form__handlers">
+            <button class="form__button" type="submit">Сохранить</button>
+          </fieldset>
+        </form>
+        <button class="pop-up__closure" type="button">
+          <img
+            class="pop-up__close-icon"
+            src="./images/closeicon.svg"
+            alt="x"
+          />
+        </button>
       </div>
-    </section>
+    </div>
   </body>
 </html>

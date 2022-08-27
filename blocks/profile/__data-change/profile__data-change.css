@@ -1,0 +1,27 @@
+.profile__data-change {
+  box-sizing: border-box;
+  width: 24px;
+  height: 24px;
+  background-image: url(../../../images/pen.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 10px 10px;
+  background-color: #000000;
+  border: 1px solid white;
+  margin-top: 15px;
+}
+
+.profile__data-change:hover {
+  opacity: 0.6;
+  transition: ease;
+  transition-duration: 0.5s;
+}
+
+@media screen and (max-width: 768px) {
+  .button__data-change {
+    width: 18px;
+    height: 18px;
+    background-size: 7.5px 7.5px;
+    margin: 0;
+  }
+}

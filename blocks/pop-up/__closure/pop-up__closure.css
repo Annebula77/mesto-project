@@ -1,0 +1,26 @@
+.pop-up__closure {
+  border: none;
+  background-color: transparent;
+  max-height: 32px;
+  max-width: 32px;
+  margin-top: -40px;
+  margin-bottom: 0;
+  margin-left: 0;
+  margin-right: 0;
+  padding: 0;
+}
+
+.pop-up__closure:hover {
+  opacity: 0.6;
+  transition: ease;
+  transition-duration: 0.5s;
+}
+
+@media screen and (max-width: 768px) {
+  .pop-up__closure {
+    max-width: 20px;
+    max-height: 20px;
+    margin-top: 0;
+    margin-bottom: 16px;
+  }
+}

@@ -1,6 +1,8 @@
 .form__button {
   display: block;
   box-sizing: border-box;
+  border-radius: 2px;
+  border: none;
   width: 358px;
   height: 50px;
   background-color: black;

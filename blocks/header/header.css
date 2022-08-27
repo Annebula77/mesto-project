@@ -1,38 +1,22 @@
 .header {
   box-sizing: border-box;
-  width: 69%;
+  border-bottom: 1px solid rgba(84, 84, 84, 1);
+  width: 100%;
   max-width: 880px;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 0 0 40px;
-}
-
-@media screen and (max-width: 1024px) {
-  .header {
-    width: 98%;
-  }
+  justify-content: flex-start;
+  padding: 0;
+  margin: 0;
 }
 
 @media screen and (max-width: 768px) {
   .header {
     max-width: 680px;
-    padding: 0 0 45px;
-  }
-}
-
-@media screen and (max-width: 685px) {
-  .header {
-    width: 90%;
-    align-items: center;
   }
 }
 
 @media screen and (max-width: 320px) {
   .header {
-    width: 100%;
     max-width: 320px;
-    padding: 0 0 40px;
-    align-items: flex-start;
   }
 }
