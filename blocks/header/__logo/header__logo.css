@@ -1,7 +1,7 @@
 .header__logo {
   width: 142px;
   justify-self: flex-start;
-  padding: 0 0 41px;
+  padding: 45px 0 41px;
 }
 
 @media screen and (max-width: 1024px) {

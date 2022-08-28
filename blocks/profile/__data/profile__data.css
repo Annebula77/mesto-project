@@ -1,7 +1,8 @@
 .profile__data {
   box-sizing: border-box;
   display: grid;
-  grid-template-columns: repeat(2, minmax(294px, auto));
+  grid-template-columns: max(294px) auto;
+  /* Cпасибо! Теперь дошло. Правильно поняла, что minmax(294px, max-content) как у Вас в скриншоте, это тоже самое, что сейчас у меня max(294px)? Пойду снова читать теорию про grid layout уже с представлением, как это работает.*/
   column-gap: 18px;
   row-gap: 8px;
   min-width: 294px;
@@ -31,7 +32,6 @@
 @media screen and (max-width: 320px) {
   .profile__data {
     padding-top: 22px;
-    /* у меня по макету отступ от элипса аватара до текста 26px, а то что я указала сейчас до границ jpg, которых не видно*/
     padding-bottom: 36px;
   }
 }
