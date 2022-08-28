@@ -1,6 +1,3 @@
-* {
-  box-shadow: 0 0 2px blue;
-}
 .page {
   box-sizing: border-box;
   display: flex;
