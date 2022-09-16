@@ -1,0 +1,16 @@
+.element__remove {
+  display: flex;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  box-sizing: border-box;
+  min-width: 18px;
+  border: none;
+  background-color: transparent;
+  padding: 0;
+}
+.element__remove:hover {
+  opacity: 0.5;
+  transition: ease;
+  transition-duration: 0.5s;
+}

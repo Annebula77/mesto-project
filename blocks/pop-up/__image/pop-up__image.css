@@ -1,0 +1,16 @@
+.pop-up__image {
+  box-sizing: border-box;
+  border-radius: 2px;
+  width: 100%;
+  max-width: 816px;
+  max-height: 75vh;
+  margin: 0;
+  padding: 0;
+  transition: visibility 0.5s, opacity 0.5s linear;
+}
+
+@media screen and (max-width: 768px) {
+  .pop-up__image {
+    min-width: 240px;
+     }
+}

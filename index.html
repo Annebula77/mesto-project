@@ -13,89 +13,52 @@
     <main class="content">
       <section class="profile" aria-label="profile">
         <img class="profile__avatar" src="./images/avatar.jpg" alt="аватар" />
-        <div class="profile__data">
-          <h1 class="profile__title">Жак-Ив Кусто</h1>
-          <!-- В прошлый раз валидатор не пропускал почему-то заголовок h1 в этом месте. Странно. Сейчас без проблем пропустил.-->
+        <div id="profileData" class="profile__data">
+          <h1 id="profileTitle" class="profile__title">Жак-Ив Кусто</h1>
           <button class="button profile__data-change" type="button"></button>
-          <p class="profile__subtitle">Исследователь океана</p>
+          <p id="profileSubtitle" class="profile__subtitle">
+            Исследователь океана
+          </p>
         </div>
         <button class="button profile__add" type="button"></button>
       </section>
       <section class="elements" aria-label="элементы">
-        <div class="element">
-          <img
-            class="element__image"
-            src="./images/Karachaevsk.jpg"
-            alt="Карачаевск"
-          />
-          <div class="element__compaunds">
-            <h2 class="element__title">Карачаево-Черкессия</h2>
-            <button class="element__like element__like_active" type="button">
-              <img class="element__icon" src="./images/heart.svg" alt="like" />
+        <template id="cardTemplate">
+          <div class="element">
+            <input
+              type="image"
+              class="element__image"
+              src="./images/Karachaevsk.jpg"
+              alt="Карачаевск"
+            />
+            <button class="element__remove" type="submit">
+              <img
+                class="element__bin-image"
+                src="./images/wastebin.svg"
+                alt="урна"
+              />
             </button>
+            <div class="element__compaunds">
+              <h2 class="element__title">Карачаево-Черкессия</h2>
+              <button class="element__like" type="button">
+                <img
+                  class="element__icon"
+                  src="./images/heart.svg"
+                  alt="like"
+                />
+              </button>
+            </div>
           </div>
-        </div>
-        <div class="element">
-          <img class="element__image" src="./images/Elbrus.jpg" alt="Эльбрус" />
-          <div class="element__compaunds">
-            <h2 class="element__title">Гора Эльбрус</h2>
-            <button class="element__like element__like_active" type="button">
-              <img class="element__icon" src="./images/heart.svg" alt="like" />
-            </button>
-          </div>
-        </div>
-        <div class="element">
-          <img class="element__image" src="./images/Dombay.jpg" alt="Домбай" />
-          <div class="element__compaunds">
-            <h2 class="element__title">Домбай</h2>
-            <button class="element__like element__like_active" type="button">
-              <img class="element__icon" src="./images/heart.svg" alt="like" />
-            </button>
-          </div>
-        </div>
-        <div class="element">
-          <img
-            class="element__image"
-            src="./images/Ostrov_Olkhon.jpg"
-            alt="Ольхон"
-          />
-          <div class="element__compaunds">
-            <h2 class="element__title">Остров Ольхон</h2>
-            <button class="element__like element__like_active" type="button">
-              <img class="element__icon" src="./images/heart.svg" alt="like" />
-            </button>
-          </div>
-        </div>
-        <div class="element">
-          <img
-            class="element__image"
-            src="./images/Shantarskie-ostrova.jpg"
-            alt="Шантарские острова"
-          />
-          <div class="element__compaunds">
-            <h2 class="element__title">Шантарские Острова</h2>
-            <button class="element__like element__like_active" type="button">
-              <img class="element__icon" src="./images/heart.svg" alt="like" />
-            </button>
-          </div>
-        </div>
-        <div class="element">
-          <img class="element__image" src="./images/Yakutia.jpg" alt="Якутия" />
-          <div class="element__compaunds">
-            <h2 class="element__title">Якутия</h2>
-            <button class="element__like element__like_active" type="button">
-              <img class="element__icon" src="./images/heart.svg" alt="like" />
-            </button>
-          </div>
-        </div>
+        </template>
       </section>
     </main>
     <footer class="footer">
       <p class="footer__copyright">© 2020 Mesto Russia</p>
     </footer>
-    <div class="pop-up">
+    <!--Pop-ups-->
+    <div id="profilePopup" class="pop-up">
       <div class="pop-up__container">
-        <form name="personal-data" class="form">
+        <form id="profileForm" name="personal-data" class="form">
           <h3 class="form__name">Редактировать профиль</h3>
           <fieldset class="form__personal-data">
             <input
@@ -103,6 +66,7 @@
               class="form__input"
               name="fullname"
               value="Жак-Ив Кусто"
+              placeholder="Имя"
               id="form__person"
               required
             />
@@ -111,12 +75,15 @@
               class="form__input"
               name="occupation"
               value="Исследователь океана"
+              placeholder="Профессия"
               id="form__occupation"
               required
             />
           </fieldset>
           <fieldset class="form__handlers">
-            <button class="form__button" type="submit">Сохранить</button>
+            <button id="submitButton" class="form__button" type="submit">
+              Сохранить
+            </button>
           </fieldset>
         </form>
         <button class="pop-up__closure" type="button">
@@ -128,5 +95,64 @@
         </button>
       </div>
     </div>
+    <!--New card add pop-up-->
+    <div id="cardAddPopup" class="pop-up">
+      <div class="pop-up__container">
+        <form id="addForm" name="place-add" class="form">
+          <h3 class="form__name">Новое место</h3>
+          <fieldset class="form__personal-data">
+            <input
+              type="text"
+              class="form__input"
+              name="place-name"
+              value=""
+              placeholder="Наименование"
+              id="form__place"
+              required
+            />
+            <input
+              type="text"
+              class="form__input"
+              name="image-link"
+              value=""
+              placeholder="Ссылка на картинку"
+              id="form__link"
+              required
+            />
+          </fieldset>
+          <fieldset class="form__handlers">
+            <button id="submitButtonAdd" class="form__button" type="submit">
+              Сохранить
+            </button>
+          </fieldset>
+        </form>
+        <button id="addClose" class="pop-up__closure" type="button">
+          <img
+            class="pop-up__close-icon"
+            src="./images/closeicon.svg"
+            alt="x"
+          />
+        </button>
+      </div>
+    </div>
+    <!--image magnifier pop-up-->
+    <div id="imagePopup" class="pop-up">
+      <div class="pop-up__container pop-up__container-image">
+        <button
+          id="imageClose"
+          class="pop-up__closure pop-up__closure-image"
+          type="button"
+        >
+          <img
+            class="pop-up__close-icon"
+            src="./images/closeicon.svg"
+            alt="x"
+          />
+        </button>
+        <img class="pop-up__image" src="#" alt="#" />
+        <p class="pop-up__caption"></p>
+      </div>
+    </div>
+    <script src="./index.js"></script>
   </body>
 </html>

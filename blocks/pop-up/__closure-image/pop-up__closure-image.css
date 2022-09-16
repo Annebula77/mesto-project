@@ -1,0 +1,12 @@
+.pop-up__closure-image {
+  display: flex;
+  align-self: flex-end;
+  margin-bottom: 8px;
+  margin-right: -40px;
+}
+
+@media screen and (max-width: 768px) {
+  .pop-up__closure-image {
+    margin-right: 0px;
+  }
+}

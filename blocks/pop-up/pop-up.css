@@ -1,13 +1,18 @@
 .pop-up {
-  display: none;
+  visibility: hidden;
+  display: flex;
   box-sizing: border-box;
   position: fixed;
   justify-content: center;
   width: 100vw;
   height: 100vh;
-  top: 0px;
+  top: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 1;
   overflow: hidden;
-}
+  opacity: 0;
+  transition: visibility 0.5s, opacity 0.5s linear;
+  }
+
+

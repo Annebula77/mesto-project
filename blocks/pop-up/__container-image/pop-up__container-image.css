@@ -1,0 +1,18 @@
+.pop-up__container-image {
+  box-sizing: border-box;
+  justify-self: center;
+  flex-direction: column;
+  width: 75vw;
+ max-height: 75vh;
+  max-width: 819px;
+  margin: 0;
+  padding: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .pop-up__container-image {
+     max-width: 75%;
+     min-width: 240px;
+  }
+
+}

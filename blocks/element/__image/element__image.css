@@ -4,5 +4,11 @@
   height: 100%;
   min-width: 282px;
   min-height: 282px;
-  object-fit: cover;
+  object-fit: fill;
+  cursor: default;
+}
+.element__image:hover {
+  opacity: 0.5;
+  transition: ease;
+  transition-duration: 0.5s;
 }
