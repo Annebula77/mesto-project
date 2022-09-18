@@ -77,6 +77,42 @@ function removeCard(defaultCard) {
     });
 }
 
+//добавление новой карточки в галерею
+   // создание шаблона для карточек
+   function createDefaultCard(link, name) {
+    const defaultCard = cardBlock.cloneNode(true);
+    const cardImage = defaultCard.querySelector('.element__image');
+    const cardTitle = defaultCard.querySelector('.element__title');
+    cardImage.src = link;
+    cardImage.alt = name;
+    cardTitle.textContent = name;
+    cardImage.addEventListener('click', () => {
+      imagePop.src = cardImage.src;
+      captionPop.textContent = cardTitle.textContent;
+      openImageModal (cardImage, cardTitle);
+    });
+
+    likePlace(defaultCard);
+    removeCard(defaultCard);
+    return defaultCard;
+
+    };
+
+    // добавление карточек из массива на страницу
+   initialCards.forEach(item => {
+
+    cardsList.prepend(createDefaultCard(item.link, item.name, ));
+  });
+
+    //добавление новой карточки из формы
+    function addNewCard (evt) {
+      evt.preventDefault();
+      cardsList.prepend(createDefaultCard(linkInput.value, placeInput.value));
+      closePopup(cardAddPopup);
+       };
+
+       //обработчик кнопки сохранить для пользовательских карточек
+   addFormElement.addEventListener('submit', addNewCard);
 //модальное окно увеличенного изображения
 function openImageModal (cardImage, cardTitle) {
   imagePop.src = cardImage.src;
@@ -85,6 +121,25 @@ function openImageModal (cardImage, cardTitle) {
   openPopup(imageModal);
 }
 
+//передача данных в профиль
+function changeProfileData (evt) {
+  evt.preventDefault();
+  profileName.textContent = nameInput.value;
+  profileJob.textContent = jobInput.value;
+  closePopup(profilePopup);
+
+  };
+
+// функция закрытия всех попапов
+closeButtons.forEach((button) => {
+  // находим 1 раз ближайший к крестику попап
+  const popup = button.closest('.pop-up');
+  // устанавливаем обработчик закрытия на крестик
+  button.addEventListener('click', () => closePopup(popup));
+});
+
+// обработчик кнопки в форме изменения профиля
+  formElement.addEventListener('submit', changeProfileData);
 //функции открытия и закрытия поапа профиля
 function openPopup (popup) {
   popup.classList.add('pop-up_opened');
@@ -106,68 +161,9 @@ addButtonOpen.addEventListener('click', function () {
 });
 
 
-// функция закрытия всех попапов
-closeButtons.forEach((button) => {
-  // находим 1 раз ближайший к крестику попап
-  const popup = button.closest('.pop-up');
-  // устанавливаем обработчик закрытия на крестик
-  button.addEventListener('click', () => closePopup(popup));
-});
-
-//передача данных в профиль
-function changeProfileData (evt) {
-  evt.preventDefault();
-  profileName.textContent = nameInput.value;
-  profileJob.textContent = jobInput.value;
-  closePopup(profilePopup);
-
-  };
-
-// обработчик кнопки в форме изменения профиля
-  formElement.addEventListener('submit', changeProfileData);
-
-
-  //добавление новой карточки в галерею
-   // создание шаблона для карточек
-function createDefaultCard(item) {
-  const defaultCard = cardBlock.cloneNode(true);
-  const cardImage = defaultCard.querySelector('.element__image');
-  const cardTitle = defaultCard.querySelector('.element__title');
-  cardImage.src = item.link;
-  cardImage.alt = item.name;
-  cardTitle.textContent = item.name;
-  cardImage.addEventListener('click', () => {
-    imagePop.src = cardImage.src;
-    captionPop.textContent = cardTitle.textContent;
-    openImageModal (cardImage, cardTitle);
-  });
-
-  likePlace(defaultCard);
-  removeCard(defaultCard);
-  return defaultCard;
-
-  };
-
-    // добавление карточек из массива на страницу
- initialCards.forEach(item => {
-
-  cardsList.prepend(createDefaultCard(item));
-});
 
 
 
-    //добавление новой карточки
-  function addNewCard (evt) {
-    evt.preventDefault();
-    const userCard = cardBlock.cloneNode(true);
-    userCard.link = linkInput.value;
-    userCard.name = placeInput.value;
 
-    cardsList.prepend(createDefaultCard(userCard));
-    likePlace(userCard);
-    removeCard(userCard);
-    closePopup(cardAddPopup);
-         };
-     //обработчик кнопки сохранить попапа профиля
- addFormElement.addEventListener('submit', addNewCard);
+
 
