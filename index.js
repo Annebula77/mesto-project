@@ -60,6 +60,13 @@ const captionPop = document.querySelector('.pop-up__caption');
 // находим все крестики проекта по универсальному селектору
 const closeButtons = document.querySelectorAll('.pop-up__closure');
 
+//объект для профиля
+
+const profileData = {
+  name: 'Жак-Ив Кусто',
+  occupation: 'Исследователь океана'
+}
+
 // ------ спасибо!!!------
 
 //функция для лайков
@@ -88,6 +95,7 @@ function removeCard(defaultCard) {
     cardTitle.textContent = name;
     cardImage.addEventListener('click', () => {
       imagePop.src = cardImage.src;
+      imagePop.alt = cardTitle.textContent;
       captionPop.textContent = cardTitle.textContent;
       openImageModal (cardImage, cardTitle);
     });
@@ -109,10 +117,13 @@ function removeCard(defaultCard) {
       evt.preventDefault();
       cardsList.prepend(createDefaultCard(linkInput.value, placeInput.value));
       closePopup(cardAddPopup);
+      linkInput.value = '';
+      placeInput.value = '';
        };
 
        //обработчик кнопки сохранить для пользовательских карточек
    addFormElement.addEventListener('submit', addNewCard);
+
 //модальное окно увеличенного изображения
 function openImageModal (cardImage, cardTitle) {
   imagePop.src = cardImage.src;
@@ -130,6 +141,9 @@ function changeProfileData (evt) {
 
   };
 
+  // обработчик кнопки в форме изменения профиля
+  formElement.addEventListener('submit', changeProfileData);
+
 // функция закрытия всех попапов
 closeButtons.forEach((button) => {
   // находим 1 раз ближайший к крестику попап
@@ -138,8 +152,8 @@ closeButtons.forEach((button) => {
   button.addEventListener('click', () => closePopup(popup));
 });
 
-// обработчик кнопки в форме изменения профиля
-  formElement.addEventListener('submit', changeProfileData);
+
+
 //функции открытия и закрытия поапа профиля
 function openPopup (popup) {
   popup.classList.add('pop-up_opened');
@@ -152,9 +166,11 @@ function closePopup (popup) {
 // обработчики открытия и закрытия попапов
 popupButtonOpen.addEventListener('click', function () {
   openPopup(profilePopup);
+  nameInput.value = profileData.name;
+  jobInput.value = profileData.occupation;
 });
 
-//ts-check
+
 
 addButtonOpen.addEventListener('click', function () {
   openPopup(cardAddPopup);
