@@ -138,7 +138,8 @@ function changeProfileData (evt) {
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
   closePopup(profilePopup);
-
+  profileData.name = nameInput.value;
+  profileData.occupation = jobInput.value;
   };
 
   // обработчик кнопки в форме изменения профиля
@@ -152,8 +153,6 @@ closeButtons.forEach((button) => {
   button.addEventListener('click', () => closePopup(popup));
 });
 
-
-
 //функции открытия и закрытия поапа профиля
 function openPopup (popup) {
   popup.classList.add('pop-up_opened');
@@ -163,14 +162,12 @@ function closePopup (popup) {
   popup.classList.remove('pop-up_opened');
 };
 
-// обработчики открытия и закрытия попапов
+// обработчики открытия поапа
 popupButtonOpen.addEventListener('click', function () {
   openPopup(profilePopup);
   nameInput.value = profileData.name;
   jobInput.value = profileData.occupation;
 });
-
-
 
 addButtonOpen.addEventListener('click', function () {
   openPopup(cardAddPopup);
