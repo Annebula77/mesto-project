@@ -62,6 +62,9 @@ const captionPop = document.querySelector('.pop-up__caption');
 // находим все крестики проекта по универсальному селектору
 const closeButtons = document.querySelectorAll('.pop-up__closure');
 
+
+const modalWindows = document.querySelectorAll('.pop-up');
+
 //объект для профиля
 
 const profileData = {
@@ -155,14 +158,30 @@ closeButtons.forEach((button) => {
   button.addEventListener('click', () => closePopup(popup));
 });
 
+modalWindows.forEach((item) => {
+  item.addEventListener('mousedown', function(e) {
+    if (e.target === item) {
+      closePopup(item);
+    }
+  })
+})
+
+
 //функции открытия и закрытия поапа профиля
 function openPopup (popup) {
   popup.classList.add('pop-up_opened');
 };
 
 function closePopup (popup) {
-  popup.classList.remove('pop-up_opened');
+   popup.classList.remove('pop-up_opened');
 };
+modalWindows.forEach((item) => {
+  document.addEventListener('keydown', function(evt) {
+    if (evt.key === 'Escape') {
+      closePopup(item);
+    }
+  })
+})
 
 // обработчики открытия поапа
 popupButtonOpen.addEventListener('click', function () {
@@ -174,6 +193,8 @@ popupButtonOpen.addEventListener('click', function () {
 addButtonOpen.addEventListener('click', function () {
   openPopup(cardAddPopup);
 });
+
+
 
 }
 
