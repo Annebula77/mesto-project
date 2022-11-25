@@ -1,3 +1,5 @@
+
+function mesto() {
 // массив для 6 карточек
 const initialCards = [
   {
@@ -67,6 +69,7 @@ const profileData = {
   occupation: 'Исследователь океана'
 }
 
+
 // ------ спасибо!!!------
 
 //функция для лайков
@@ -117,8 +120,7 @@ function removeCard(defaultCard) {
       evt.preventDefault();
       cardsList.prepend(createDefaultCard(linkInput.value, placeInput.value));
       closePopup(cardAddPopup);
-      linkInput.value = '';
-      placeInput.value = '';
+      addFormElement.reset();
        };
 
        //обработчик кнопки сохранить для пользовательских карточек
@@ -173,7 +175,9 @@ addButtonOpen.addEventListener('click', function () {
   openPopup(cardAddPopup);
 });
 
+}
 
+mesto();
 
 
 
