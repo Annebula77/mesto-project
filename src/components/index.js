@@ -1,5 +1,4 @@
 
-function mesto() {
 // массив для 6 карточек
 const initialCards = [
   {
@@ -178,6 +177,7 @@ function closePopup (popup) {
 modalWindows.forEach((item) => {
   document.addEventListener('keydown', function(evt) {
     if (evt.key === 'Escape') {
+      openPopup(item);
       closePopup(item);
     }
   })
@@ -196,9 +196,6 @@ addButtonOpen.addEventListener('click', function () {
 
 
 
-}
-
-mesto();
 
 
 
