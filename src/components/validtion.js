@@ -55,7 +55,6 @@ const toggleButtonState = (inputList, buttonElement, settings) => {
       const inputList = Array.from(formElement.querySelectorAll(settings.inputSelector));
       const buttonElement = formElement.querySelector(settings.submitButtonSelector);
       toggleButtonState(inputList, buttonElement, settings);
-
       inputList.forEach((inputElement) => {
         inputElement.addEventListener('input', () => {
           isValid(formElement, inputElement, settings);
@@ -76,15 +75,7 @@ const toggleButtonState = (inputList, buttonElement, settings) => {
     };
 
 
-enableValidation({
-formSelector: '.form',
-inputSelector: '.form__input',
-submitButtonSelector: '.form__button',
-inactiveButtonClass: 'form__button_inactive',
-inputErrorClass: 'form__input_type_error',
-errorClass: 'form__input-error_active'
-});
-
+export { isValid, showInputError, hideInputError, hasInvalidInput, toggleButtonState, setEventListeners, enableValidation };
 
 
 
