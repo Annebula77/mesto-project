@@ -1,158 +1,168 @@
 <!DOCTYPE html>
 <html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mesto</title>
-    <link rel="stylesheet" href="./pages/index.css" />
-  </head>
-  <body class="page">
-    <header class="header">
-      <img class="header__logo" src="./images/logo.svg" alt="логотип" />
-    </header>
-    <main class="content">
-      <section class="profile" aria-label="profile">
-        <img class="profile__avatar" src="./images/avatar.jpg" alt="аватар" />
-        <div id="profileData" class="profile__data">
-          <h1 id="profileTitle" class="profile__title">Жак-Ив Кусто</h1>
-          <button class="button profile__data-change" type="button"></button>
-          <p id="profileSubtitle" class="profile__subtitle">
-            Исследователь океана
-          </p>
-        </div>
-        <button class="button profile__add" type="button"></button>
-      </section>
-      <section class="elements" aria-label="элементы">
-        <template id="cardTemplate">
-          <div class="element">
-            <input
-              type="image"
-              class="element__image"
-              src="./images/Karachaevsk.jpg"
-              alt="Карачаевск"
-            />
-            <button class="element__remove" type="submit">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mesto</title>
+  <link rel="stylesheet" href="./pages/index.css">
+</head>
+
+<body class="page">
+  <header class="header">
+    <img class="header__logo" src="./images/logo.svg" alt="логотип">
+  </header>
+  <main class="content">
+    <section class="profile" aria-label="profile">
+      <img class="profile__avatar" src="./images/avatar.jpg" alt="аватар">
+      <div id="profileData" class="profile__data">
+        <h1 id="profileTitle" class="profile__title">Жак-Ив Кусто</h1>
+        <button class="button profile__data-change" type="button"></button>
+        <p id="profileSubtitle" class="profile__subtitle">
+          Исследователь океана
+        </p>
+      </div>
+      <button class="button profile__add" type="button"></button>
+    </section>
+    <section class="elements" aria-label="элементы">
+      <template id="cardTemplate">
+        <div class="element">
+          <input
+                 type="image"
+                 class="element__image"
+                 src="./images/Karachaevsk.jpg"
+                 alt="Карачаевск">
+          <button class="element__remove" type="submit">
+            <img
+                 class="element__bin-image"
+                 src="./images/wastebin.svg"
+                 alt="урна">
+          </button>
+          <div class="element__compaunds">
+            <h2 class="element__title">Карачаево-Черкессия</h2>
+            <button class="element__like" type="button">
               <img
-                class="element__bin-image"
-                src="./images/wastebin.svg"
-                alt="урна"
-              />
+                   class="element__icon"
+                   src="./images/heart.svg"
+                   alt="like">
             </button>
-            <div class="element__compaunds">
-              <h2 class="element__title">Карачаево-Черкессия</h2>
-              <button class="element__like" type="button">
-                <img
-                  class="element__icon"
-                  src="./images/heart.svg"
-                  alt="like"
-                />
-              </button>
-            </div>
           </div>
-        </template>
-      </section>
-    </main>
-    <footer class="footer">
-      <p class="footer__copyright">© 2020 Mesto Russia</p>
-    </footer>
-    <!--Pop-ups-->
-    <div id="profilePopup" class="pop-up">
-      <div class="pop-up__container">
-        <form id="profileForm" name="personal-data" class="form">
-          <h3 class="form__name">Редактировать профиль</h3>
-          <fieldset class="form__personal-data">
-            <input
-              type="text"
-              class="form__input"
-              name="fullname"
-              value=""
-              placeholder="Имя"
-              id="form__person"
-              required
-            />
-            <input
-              type="text"
-              class="form__input"
-              name="occupation"
-              value=""
-              placeholder="Профессия"
-              id="form__occupation"
-              required
-            />
-          </fieldset>
-          <fieldset class="form__handlers">
-            <button id="submitButton" class="form__button" type="submit">
-              Сохранить
-            </button>
-          </fieldset>
-        </form>
-        <button class="pop-up__closure" type="button">
-          <img
-            class="pop-up__close-icon"
-            src="./images/closeicon.svg"
-            alt="x"
-          />
-        </button>
-      </div>
+        </div>
+      </template>
+    </section>
+  </main>
+  <footer class="footer">
+    <p class="footer__copyright">© 2020 Mesto Russia</p>
+  </footer>
+  <!--Pop-ups-->
+  <div id="profilePopup" class="pop-up">
+    <div class="pop-up__container">
+      <form id="profileForm" name="personal-data" class="form" novalidate>
+        <h3 class="form__name">Редактировать профиль</h3>
+        <fieldset class="form__personal-data">
+          <input
+                 type="text"
+                 class="form__input"
+                 name="fullname"
+                 value=""
+                 placeholder="Имя"
+                 id="form__person"
+                 minlength="2"
+                 maxlength="40"
+                 pattern="^[a-zA-Zа-яА-яёЁ\s\-]+$"
+                 data-error-message="Поле должно содержать только латинские буквы, кириллические буквы, знаки дефиса и пробелы."
+                 required>
+          <span class="form__person-error form__input-error"></span>
+          <input
+                 type="text"
+                 class="form__input"
+                 name="occupation"
+                 value=""
+                 placeholder="Профессия"
+                 id="form__occupation"
+                 minlength="2"
+                 maxlength="200"
+                 pattern="^[a-zA-Zа-яА-яёЁ\s\-]+$"
+                 data-error-message="Поле должно содержать только латинские буквы, кириллические буквы, знаки дефиса и
+                 пробелы."
+                 required>
+          <span class="form__occupation-error form__input-error"></span>
+        </fieldset>
+        <fieldset class="form__handlers">
+          <button id="submitButton" class="form__button" type="submit" disabled>
+            Сохранить
+          </button>
+        </fieldset>
+      </form>
+      <button class="pop-up__closure" type="button">
+        <img
+             class="pop-up__close-icon"
+             src="./images/closeicon.svg"
+             alt="x">
+      </button>
     </div>
-    <!--New card add pop-up-->
-    <div id="cardAddPopup" class="pop-up">
-      <div class="pop-up__container">
-        <form id="addForm" name="place-add" class="form">
-          <h3 class="form__name">Новое место</h3>
-          <fieldset class="form__personal-data">
-            <input
-              type="text"
-              class="form__input"
-              name="place-name"
-              value=""
-              placeholder="Наименование"
-              id="form__place"
-              required
-            />
-            <input
-              type="text"
-              class="form__input"
-              name="image-link"
-              value=""
-              placeholder="Ссылка на картинку"
-              id="form__link"
-              required
-            />
-          </fieldset>
-          <fieldset class="form__handlers">
-            <button id="submitButtonAdd" class="form__button" type="submit">
-              Сохранить
-            </button>
-          </fieldset>
-        </form>
-        <button id="addClose" class="pop-up__closure" type="button">
-          <img
-            class="pop-up__close-icon"
-            src="./images/closeicon.svg"
-            alt="x"
-          />
-        </button>
-      </div>
+  </div>
+  <!--New card add pop-up-->
+  <div id="cardAddPopup" class="pop-up">
+    <div class="pop-up__container">
+      <form id="addForm" name="place-add" class="form" novalidate>
+        <h3 class="form__name">Новое место</h3>
+        <fieldset class="form__personal-data">
+          <input
+                 type="text"
+                 class="form__input"
+                 name="place-name"
+                 value=""
+                 placeholder="Наименование"
+                 id="form__place"
+                 minlength="2"
+                 maxlength="30"
+                 pattern="^[a-zA-Zа-яА-яёЁ\s\-]+$"
+                 data-error-message="Поле должно содержать только латинские буквы, кириллические буквы, знаки дефиса и пробелы."
+                 required>
+          <span class="form__place-error form__input-error"></span>
+          <input
+                 type="url"
+                 class="form__input"
+                 name="image-link"
+                 value=""
+                 placeholder="Ссылка на картинку"
+                 id="form__link"
+                 required>
+          <span class="form__link-error form__input-error"></span>
+        </fieldset>
+        <fieldset class="form__handlers">
+          <button id="submitButtonAdd" class="form__button" type="submit" disabled>
+            Сохранить
+          </button>
+        </fieldset>
+      </form>
+      <button id="addClose" class="pop-up__closure" type="button">
+        <img
+             class="pop-up__close-icon"
+             src="./images/closeicon.svg"
+             alt="x">
+      </button>
     </div>
-    <!--image magnifier pop-up-->
-    <div id="imagePopup" class="pop-up">
-      <div class="pop-up__container pop-up__container-image">
-        <button
-          id="imageClose"
-          class="pop-up__closure pop-up__closure-image"
-          type="button"
-        >
-          <img
-            class="pop-up__close-icon"
-            src="./images/closeicon.svg"
-            alt="x"
-          />
-        </button>
-        <img class="pop-up__image" src="#" alt="#" />
-        <p class="pop-up__caption"></p>
-      </div>
+  </div>
+  <!--image magnifier pop-up-->
+  <div id="imagePopup" class="pop-up">
+    <div class="pop-up__container pop-up__container-image">
+      <button
+              id="imageClose"
+              class="pop-up__closure pop-up__closure-image"
+              type="button">
+        <img
+             class="pop-up__close-icon"
+             src="./images/closeicon.svg"
+             alt="x">
+      </button>
+      <img class="pop-up__image" src="#" alt="#">
+      <p class="pop-up__caption"></p>
     </div>
-    <script src="./index.js"></script>
-  </body>
+  </div>
+  <script src="./index.js"></script>
+  <script src="./validtion.js"></script>
+</body>
+
 </html>
