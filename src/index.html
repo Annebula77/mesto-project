@@ -5,16 +5,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mesto</title>
-  <link rel="stylesheet" href="./pages/index.css">
 </head>
 
 <body class="page">
   <header class="header">
-    <img class="header__logo" src="./images/logo.svg" alt="логотип">
+    <img class="header__logo" src="<%=require('./images/logo.svg')%>" alt="логотип">
   </header>
   <main class="content">
     <section class="profile" aria-label="profile">
-      <img class="profile__avatar" src="./images/avatar.jpg" alt="аватар">
+      <img class="profile__avatar" src="<%=require('./images/avatar.jpg')%>" alt="аватар">
       <div id="profileData" class="profile__data">
         <h1 id="profileTitle" class="profile__title">Жак-Ив Кусто</h1>
         <button class="button profile__data-change" type="button"></button>
@@ -35,7 +34,7 @@
           <button class="element__remove" type="submit">
             <img
                  class="element__bin-image"
-                 src="./images/wastebin.svg"
+                 src="<%=require('./images/wastebin.svg')%>"
                  alt="урна">
           </button>
           <div class="element__compaunds">
@@ -43,7 +42,7 @@
             <button class="element__like" type="button">
               <img
                    class="element__icon"
-                   src="./images/heart.svg"
+                   src="<%=require('./images/heart.svg')%>"
                    alt="like">
             </button>
           </div>
@@ -89,7 +88,7 @@
           <span class="form__occupation-error form__input-error"></span>
         </fieldset>
         <fieldset class="form__handlers">
-          <button id="submitButton" class="form__button" type="submit" disabled>
+          <button id="submitButton" class="form__button" type="submit">
             Сохранить
           </button>
         </fieldset>
@@ -97,8 +96,7 @@
       <button class="pop-up__closure" type="button">
         <img
              class="pop-up__close-icon"
-             src="./images/closeicon.svg"
-             alt="x">
+             src="<%=require('./images/closeicon.svg')%>" alt="x">
       </button>
     </div>
   </div>
@@ -132,7 +130,7 @@
           <span class="form__link-error form__input-error"></span>
         </fieldset>
         <fieldset class="form__handlers">
-          <button id="submitButtonAdd" class="form__button" type="submit" disabled>
+          <button id="submitButtonAdd" class="form__button" type="submit">
             Сохранить
           </button>
         </fieldset>
@@ -140,7 +138,7 @@
       <button id="addClose" class="pop-up__closure" type="button">
         <img
              class="pop-up__close-icon"
-             src="./images/closeicon.svg"
+             src="<%=require('./images/closeicon.svg')%>"
              alt="x">
       </button>
     </div>
@@ -154,15 +152,13 @@
               type="button">
         <img
              class="pop-up__close-icon"
-             src="./images/closeicon.svg"
+             src="<%=require('./images/closeicon.svg')%>"
              alt="x">
       </button>
       <img class="pop-up__image" src="#" alt="#">
       <p class="pop-up__caption"></p>
     </div>
   </div>
-  <script src="./index.js"></script>
-  <script src="./validtion.js"></script>
 </body>
 
 </html>
