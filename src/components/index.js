@@ -1,4 +1,4 @@
-//import '../pages/index.css';
+import '../pages/index.css';
 import { initialCards, profileData } from './array.js';
 import { profilePopup, formElement, popupButtonOpen, profileName, profileJob, nameInput, jobInput, addButtonOpen, cardAddPopup, addFormElement, placeInput, linkInput, imageModal, imagePop, captionPop, closeButtons, modalWindows, openPopup, closePopup, openImageModal } from '../components/modal.js';
 import { changeProfileData } from './utils.js';
