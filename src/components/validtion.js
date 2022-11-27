@@ -1,3 +1,6 @@
+
+import { cardSubmitButton } from './utils.js';
+
 const showInputError = (formElement, inputElement, errorMessage, settings) => {
    const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
    inputElement.classList.add(settings.inputErrorClass);
@@ -37,6 +40,11 @@ const hasInvalidInput = (inputList) => {
   });
 };
 
+const blockSubmitButton = (settings, cardSubmitButton) => {
+  cardSubmitButton.disabled = true;
+  cardSubmitButton.classList.add(settings.inactiveButtonClass);
+};
+
 const toggleButtonState = (inputList, buttonElement, settings) => {
   // Если есть хотя бы один невалидный инпут
   if (hasInvalidInput(inputList)) {
@@ -50,7 +58,7 @@ const toggleButtonState = (inputList, buttonElement, settings) => {
       }
     };
 
-    // Добавление слушателей к инпутам форм для управления состоянием кнопки
+       // Добавление слушателей к инпутам форм для управления состоянием кнопки
     const setEventListeners = (formElement, settings) => {
       const inputList = Array.from(formElement.querySelectorAll(settings.inputSelector));
       const buttonElement = formElement.querySelector(settings.submitButtonSelector);
@@ -62,6 +70,7 @@ const toggleButtonState = (inputList, buttonElement, settings) => {
         });
       });
     };
+
 
     const enableValidation = (settings) => {
       const formList = Array.from(document.querySelectorAll(settings.formSelector));
@@ -75,7 +84,7 @@ const toggleButtonState = (inputList, buttonElement, settings) => {
     };
 
 
-export { isValid, showInputError, hideInputError, hasInvalidInput, toggleButtonState, setEventListeners, enableValidation };
+export { isValid, showInputError, hideInputError, hasInvalidInput, toggleButtonState, setEventListeners, enableValidation, blockSubmitButton };
 
 
 

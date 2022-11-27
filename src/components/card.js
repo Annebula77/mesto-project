@@ -1,10 +1,5 @@
-import { closePopup, linkInput, placeInput, cardAddPopup, addFormElement, imagePop, captionPop, openImageModal } from './modal.js';
-
-//переменные карточек
-
-const cardsList = document.querySelector('.elements');
-const cardTemplate = document.querySelector('#cardTemplate').content;
-const cardBlock = cardTemplate.querySelector('.element').cloneNode(true);
+import { cardAddFormElement, captionPop, imagePop, cardBlock } from './utils.js';
+import { openImageModal, addNewCard } from './index.js';
 
 //функция для лайков
 function likePlace(defaultCard) {
@@ -42,16 +37,7 @@ function removeCard(defaultCard) {
 
   };
 
-
- //добавление новой карточки из формы
- function addNewCard (evt) {
-  evt.preventDefault();
-  cardsList.prepend(createDefaultCard(linkInput.value, placeInput.value));
-  closePopup(cardAddPopup);
-  addFormElement.reset();
-   };
-
    //обработчик кнопки сохранить для пользовательских карточек
-addFormElement.addEventListener('submit', addNewCard);
+   cardAddFormElement.addEventListener('submit', addNewCard);
 
-export { cardsList, cardTemplate, cardBlock, createDefaultCard, likePlace, removeCard, addNewCard };
+export { createDefaultCard, likePlace, removeCard, addNewCard };

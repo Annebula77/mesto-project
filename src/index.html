@@ -17,9 +17,7 @@
       <div id="profileData" class="profile__data">
         <h1 id="profileTitle" class="profile__title">Жак-Ив Кусто</h1>
         <button class="button profile__data-change" type="button"></button>
-        <p id="profileSubtitle" class="profile__subtitle">
-          Исследователь океана
-        </p>
+        <p id="profileSubtitle" class="profile__subtitle">Исследователь океана</p>
       </div>
       <button class="button profile__add" type="button"></button>
     </section>
@@ -88,7 +86,7 @@
           <span class="form__occupation-error form__input-error"></span>
         </fieldset>
         <fieldset class="form__handlers">
-          <button id="submitButton" class="form__button" type="submit">
+          <button id="submitButton" class="form__button" type="submit" disabled>
             Сохранить
           </button>
         </fieldset>
@@ -130,7 +128,7 @@
           <span class="form__link-error form__input-error"></span>
         </fieldset>
         <fieldset class="form__handlers">
-          <button id="submitButtonAdd" class="form__button" type="submit">
+          <button id="submitButtonAdd" class="form__button" type="submit" disabled>
             Сохранить
           </button>
         </fieldset>
@@ -144,7 +142,7 @@
     </div>
   </div>
   <!--image magnifier pop-up-->
-  <div id="imagePopup" class="pop-up">
+  <div id="imagePopup" class="pop-up pop-up_opacity">
     <div class="pop-up__container pop-up__container-image">
       <button
               id="imageClose"

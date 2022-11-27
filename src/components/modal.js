@@ -1,58 +1,24 @@
-import { profileData } from './array.js';
+import { profilePopup, cardAddPopup, imageModal, popupButtonOpen, profileName, profileJob, nameInput, jobInput, closeButtons, modalWindows } from './utils.js';
 
-// переменный попапа профиля
-const profilePopup = document.querySelector('#profilePopup');
-const formElement = document.querySelector('#profileForm');
-const popupButtonOpen = document.querySelector('.profile__data-change');
-const profileName = document.querySelector('#profileTitle');
-const profileJob = document.querySelector('#profileSubtitle');
-const nameInput = document.querySelector('#form__person');
-const jobInput = document.querySelector('#form__occupation');
-
-// переменные попапа добавления новых карточек
-const addButtonOpen = document.querySelector('.profile__add');
-const cardAddPopup = document.querySelector('#cardAddPopup');
-const addFormElement = document.querySelector('#addForm');
-const placeInput = document.querySelector('#form__place');
-const linkInput = document.querySelector('#form__link');
-
-
-//переменные попапа полноразмерных изображений
-const imageModal = document.querySelector('#imagePopup');
-const imagePop = document.querySelector('.pop-up__image');
-const captionPop = document.querySelector('.pop-up__caption');
-
-// массив закрывающих кнопок попапов
-const closeButtons = document.querySelectorAll('.pop-up__closure');
-
-// массив из всех модальных окон
-const modalWindows = document.querySelectorAll('.pop-up');
 
 
 //функции открытия и закрытия поапа профиля
 function openPopup (popup) {
   popup.classList.add('pop-up_opened');
-};
+  document.addEventListener('keydown', closePopupByEsc);
+ };
 
 function closePopup (popup) {
    popup.classList.remove('pop-up_opened');
+   document.removeEventListener('keydown', closePopupByEsc);
 };
-
-
-//модальное окно увеличенного изображения
-function openImageModal (cardImage, cardTitle) {
-  imagePop.src = cardImage.src;
-  imagePop.alt = cardImage.alt;
-  captionPop.textContent = cardTitle.textContent;
-  openPopup(imageModal);
-}
 
 // обработчики открытия поапа
 popupButtonOpen.addEventListener('click', function () {
   openPopup(profilePopup);
-  nameInput.value = profileData.name;
-  jobInput.value = profileData.occupation;
-});
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileJob.textContent;
+  });
 
 
 // функция закрытия всех попапов
@@ -72,14 +38,14 @@ modalWindows.forEach((item) => {
   })
 });
 
-// закрытие попапа при нажатии кнопки escape
-modalWindows.forEach((item) => {
-  document.addEventListener('keydown', function(evt) {
-    if (evt.key === 'Escape') {
-      openPopup(item);
-      closePopup(item);
-    }
-  })
-})
+// функция закрытия попапа при нажатии кнопки escape
 
- export { profilePopup, formElement, popupButtonOpen, profileName, profileJob, nameInput, jobInput, addButtonOpen, cardAddPopup, addFormElement, placeInput, linkInput, imageModal, imagePop, captionPop, closeButtons, modalWindows, openPopup, closePopup, openImageModal };
+const closePopupByEsc = (evt) => {
+  if (evt.key === 'Escape') {
+    closePopup(profilePopup);
+    closePopup(cardAddPopup);
+    closePopup(imageModal);
+  }
+}
+
+export { openPopup, closePopup, closePopupByEsc };
