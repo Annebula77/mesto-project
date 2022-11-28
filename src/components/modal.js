@@ -24,7 +24,7 @@ modalWindows.forEach((item) => {
 
 const closePopupByEsc = (evt) => {
   if (evt.key === 'Escape') {
-    document.querySelector('.pop-up_opened');
+    closePopup(document.querySelector('.pop-up_opened'));
       }
 }
 
