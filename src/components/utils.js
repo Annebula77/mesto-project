@@ -1,6 +1,3 @@
-import { openPopup } from './modal.js';
-import { blockSubmitButton } from './validtion.js';
-
 
 // переменный попапа профиля
 const profilePopup = document.querySelector('#profilePopup');
@@ -46,10 +43,5 @@ const settings = {
   errorClass: 'form__input-error_active'
   };
 
-
-  buttonOpenPopupCard.addEventListener('click', function () {
-  openPopup(cardAddPopup);
-  blockSubmitButton(settings, cardSubmitButton);
-});
 
 export { profilePopup, formElement, popupButtonOpen, profileName, profileJob, nameInput, jobInput, buttonOpenPopupCard, cardAddPopup, cardAddFormElement, placeInput, linkInput, imageModal, imagePop, captionPop, closeButtons, modalWindows, cardsList, cardTemplate, cardBlock, settings, cardSubmitButton }
