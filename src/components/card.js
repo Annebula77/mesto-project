@@ -1,4 +1,4 @@
-import { cardAddFormElement, captionPop, imagePop, cardBlock } from './utils.js';
+import { captionPop, imagePop, cardBlock } from './utils.js';
 import { openImageModal, addNewCard } from './index.js';
 
 //функция для лайков
@@ -37,7 +37,5 @@ function removeCard(defaultCard) {
 
   };
 
-   //обработчик кнопки сохранить для пользовательских карточек
-   cardAddFormElement.addEventListener('submit', addNewCard);
 
 export { createDefaultCard, likePlace, removeCard, addNewCard };

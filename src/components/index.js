@@ -15,16 +15,8 @@ import { cardsList, cardTemplate, cardBlock, profilePopup, formElement, popupBut
     profileData.occupation = jobInput.value;
     };
 
-  // обработчик кнопки в форме изменения профиля
-  formElement.addEventListener('submit', changeProfileData);
-
- // добавление карточек из массива на страницу
- initialCards.forEach(item => {
-  cardsList.prepend(createDefaultCard(item.link, item.name, ));
-});
-
- //добавление новой карточки из формы
- export function addNewCard (evt) {
+    //добавление новой карточки из формы
+export function addNewCard (evt) {
   evt.preventDefault();
   cardsList.prepend(createDefaultCard(linkInput.value, placeInput.value));
   closePopup(cardAddPopup);
@@ -38,6 +30,40 @@ export function openImageModal (cardImage, cardTitle) {
   captionPop.textContent = cardTitle.textContent;
   openPopup(imageModal);
 }
+
+buttonOpenPopupCard.addEventListener('click', function () {
+  openPopup(cardAddPopup);
+  blockSubmitButton(settings, cardSubmitButton);
+});
+
+// обработчики открытия поапа
+popupButtonOpen.addEventListener('click', function () {
+  openPopup(profilePopup);
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileJob.textContent;
+  });
+
+
+// функция закрытия всех попапов
+closeButtons.forEach((button) => {
+  // находим 1 раз ближайший к крестику попап
+  const popup = button.closest('.pop-up');
+  // устанавливаем обработчик закрытия на крестик
+  button.addEventListener('click', () => closePopup(popup));
+});
+
+
+  // обработчик кнопки в форме изменения профиля
+  formElement.addEventListener('submit', changeProfileData);
+
+   //обработчик кнопки сохранить для пользовательских карточек
+   cardAddFormElement.addEventListener('submit', addNewCard);
+
+ // добавление карточек из массива на страницу
+ initialCards.forEach(item => {
+  cardsList.prepend(createDefaultCard(item.link, item.name, ));
+});
+
 
 enableValidation(settings);
 
