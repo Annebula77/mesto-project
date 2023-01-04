@@ -3,7 +3,7 @@ import { serverData, getUserData, getServerCards, editProfileData, changeAvatar,
 import { openPopup, closePopup, closePopupByEsc } from '../components/modal.js';
 import { createDefaultCard } from './card.js';
 import { isValid, showInputError, hideInputError, hasInvalidInput, toggleButtonState, setEventListeners, blockSubmitButton, enableValidation } from './validtion.js';
-import { cardsList, cardTemplate, cardBlock, avatarForm, profile, profileSubmitBtn, avatar, avatarInput, avatarChangeBtn, avatarSubmitBtn, popupAvatar, profilePopup, formElement, popupButtonOpen, profileName, profileJob, nameInput, jobInput, buttonOpenPopupCard, cardAddPopup, cardAddFormElement, placeInput, linkInput, imageModal, imagePop, captionPop, closeButtons, modalWindows, submitButton, settings, cardSubmitButton } from './utils.js';
+import { cardsList, cardTemplate, cardBlock, confirmDeleteBtn, confirmDelete, avatarForm, profile, profileSubmitBtn, avatar, avatarInput, avatarChangeBtn, avatarSubmitBtn, popupAvatar, profilePopup, formElement, popupButtonOpen, profileName, profileJob, nameInput, jobInput, buttonOpenPopupCard, cardAddPopup, cardAddFormElement, placeInput, linkInput, imageModal, imagePop, captionPop, closeButtons, modalWindows, submitButton, settings, cardSubmitButton } from './utils.js';
 
 
 //Данные из промисов (вторые then)

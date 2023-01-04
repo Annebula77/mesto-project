@@ -1,0 +1,10 @@
+.pop-up__closure_confrim {
+  margin-right: -32px;
+}
+
+@media screen and (max-width: 768px) {
+  .pop-up__closure_confrim {
+    margin-right: 2px;
+    margin-top: -27px;
+  }
+}
