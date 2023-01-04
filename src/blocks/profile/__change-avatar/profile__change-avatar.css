@@ -1,0 +1,14 @@
+.profile__change-avatar {
+  position: absolute;
+  top: 35%;
+  right: 37%;
+  max-width: 26px;
+  max-height: 26px;
+  background-color: transparent;
+  transition: ease;
+  transition-duration: 0.5s;
+  visibility: hidden;
+  padding: 0;
+  margin: 0;
+  z-index: -10;
+}

@@ -1,12 +1,20 @@
 
-// переменный попапа профиля
+// переменные попапа профиля
 const profilePopup = document.querySelector('#profilePopup');
 const formElement = document.querySelector('#profileForm');
+const profile = document.querySelector('.profile');
+const avatar = document.querySelector('.profile__avatar');
+const avatarChangeBtn = document.querySelector('.profile__avatar-wrapper ');
+const avatarForm = document.querySelector('#avatarForm');
+const avatarSubmitBtn = document.querySelector('#avatarButton');
+const avatarInput = document.querySelector('#form__avatar');
+const popupAvatar = document.querySelector('#changeAvatar');
 const popupButtonOpen = document.querySelector('.profile__data-change');
 const profileName = document.querySelector('#profileTitle');
 const profileJob = document.querySelector('#profileSubtitle');
 const nameInput = document.querySelector('#form__person');
 const jobInput = document.querySelector('#form__occupation');
+const profileSubmitBtn = document.querySelector('#submitButton');
 
 // переменные попапа добавления новых карточек
 const buttonOpenPopupCard = document.querySelector('.profile__add');
@@ -33,6 +41,8 @@ const cardsList = document.querySelector('.elements');
 const cardTemplate = document.querySelector('#cardTemplate').content;
 const cardBlock = cardTemplate.querySelector('.element').cloneNode(true);
 
+
+
 //объект валидации
 const settings = {
   formSelector: '.form',
@@ -44,4 +54,4 @@ const settings = {
   };
 
 
-export { profilePopup, formElement, popupButtonOpen, profileName, profileJob, nameInput, jobInput, buttonOpenPopupCard, cardAddPopup, cardAddFormElement, placeInput, linkInput, imageModal, imagePop, captionPop, closeButtons, modalWindows, cardsList, cardTemplate, cardBlock, settings, cardSubmitButton }
+export { profilePopup, profile, avatar, avatarForm, profileSubmitBtn, avatarChangeBtn, avatarInput, avatarSubmitBtn, popupAvatar, formElement, popupButtonOpen, profileName, profileJob, nameInput, jobInput, buttonOpenPopupCard, cardAddPopup, cardAddFormElement, placeInput, linkInput, imageModal, imagePop, captionPop, closeButtons, modalWindows, cardsList, cardTemplate, cardBlock, settings, cardSubmitButton }

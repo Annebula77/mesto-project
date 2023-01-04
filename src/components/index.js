@@ -1,26 +1,80 @@
 import '../pages/index.css';
-import { initialCards, profileData } from './array.js';
+import { serverData, getUserData, getServerCards, editProfileData, changeAvatar, postNewCard, deleteMyCard, putLike, deleteLike } from './api.js';
 import { openPopup, closePopup, closePopupByEsc } from '../components/modal.js';
-import { createDefaultCard, likePlace, removeCard } from './card.js';
+import { createDefaultCard } from './card.js';
 import { isValid, showInputError, hideInputError, hasInvalidInput, toggleButtonState, setEventListeners, blockSubmitButton, enableValidation } from './validtion.js';
-import { cardsList, cardTemplate, cardBlock, profilePopup, formElement, popupButtonOpen, profileName, profileJob, nameInput, jobInput, buttonOpenPopupCard, cardAddPopup, cardAddFormElement, placeInput, linkInput, imageModal, imagePop, captionPop, closeButtons, modalWindows, submitButton, settings, cardSubmitButton } from './utils.js';
+import { cardsList, cardTemplate, cardBlock, avatarForm, profile, profileSubmitBtn, avatar, avatarInput, avatarChangeBtn, avatarSubmitBtn, popupAvatar, profilePopup, formElement, popupButtonOpen, profileName, profileJob, nameInput, jobInput, buttonOpenPopupCard, cardAddPopup, cardAddFormElement, placeInput, linkInput, imageModal, imagePop, captionPop, closeButtons, modalWindows, submitButton, settings, cardSubmitButton } from './utils.js';
 
-//передача данных в профиль
+
+//Данные из промисов (вторые then)
+Promise.all([getUserData(), getServerCards()])
+.then(([me, cards]) => {
+  // данные из профиля
+  profile.id = me._id;
+  profileName.textContent = me.name;
+  profileJob.textContent = me.about;
+  avatar.src = me.avatar;
+
+  // добавление карточек c сервера
+  cards.forEach((card) => {
+       cardsList.prepend(createDefaultCard(card, profile));
+      });
+})
+
+.catch((err) => {
+  console.error(err);
+})
+
+
+//обработчик формы изменения профиля
     function changeProfileData (evt) {
     evt.preventDefault();
+    profileSubmitBtn.textContent = 'Сохранение...';
     profileName.textContent = nameInput.value;
     profileJob.textContent = jobInput.value;
+    editProfileData(nameInput.value, jobInput.value).finally(() => {
+      profileSubmitBtn.textContent = "Сохранить";
+    });
     closePopup(profilePopup);
-    profileData.name = nameInput.value;
-    profileData.occupation = jobInput.value;
-    };
+       };
+
+// функция обработки формы изменения аватара
+       function addNewAvatar (evt) {
+        evt.preventDefault();
+        avatarSubmitBtn.textContent = 'Сохранение...';
+        const avatarValue = avatarInput.value;
+        changeAvatar(avatarValue).then((me) => {
+          console.log(avatarValue);
+          avatar.src = me.avatar;
+          avatar.alt = me.avatar;
+          })
+          .catch((err) => {
+            console.error(err);
+          })
+        .finally(() => {
+          avatarSubmitBtn.textContent = "Сохранить";
+        });
+        closePopup(popupAvatar);
+       }
+       avatarForm.addEventListener('submit', addNewAvatar);
 
     //добавление новой карточки из формы
 export function addNewCard (evt) {
   evt.preventDefault();
-  cardsList.prepend(createDefaultCard(linkInput.value, placeInput.value));
-  closePopup(cardAddPopup);
-  cardAddFormElement.reset();
+
+  cardSubmitButton.textContent = "Создание...";
+  postNewCard(placeInput.value, linkInput.value)
+    .then((card) => {
+      cardAddFormElement.reset();
+      cardsList.prepend(createDefaultCard(card, profile));
+      closePopup(cardAddPopup);
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+    .finally(() => {
+      cardSubmitButton.textContent = "Создать";
+    });
    };
 
 //модальное окно увеличенного изображения
@@ -30,6 +84,11 @@ export function openImageModal (cardImage, cardTitle) {
   captionPop.textContent = cardTitle.textContent;
   openPopup(imageModal);
 }
+
+avatarChangeBtn.addEventListener('click', function() {
+  openPopup(popupAvatar);
+ });
+
 
 buttonOpenPopupCard.addEventListener('click', function () {
   openPopup(cardAddPopup);
@@ -59,19 +118,9 @@ closeButtons.forEach((button) => {
    //обработчик кнопки сохранить для пользовательских карточек
    cardAddFormElement.addEventListener('submit', addNewCard);
 
- // добавление карточек из массива на страницу
- initialCards.forEach(item => {
-  cardsList.prepend(createDefaultCard(item.link, item.name, ));
-});
+
 
 
 enableValidation(settings);
-
-
-
-
-
-
-
 
 

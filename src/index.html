@@ -13,7 +13,13 @@
   </header>
   <main class="content">
     <section class="profile" aria-label="profile">
-      <img class="profile__avatar" src="<%=require('./images/avatar.jpg')%>" alt="аватар">
+      <button type="button" class="profile__avatar-wrapper">
+        <img class="profile__change-avatar" src="<%=require('./images/change_avatar.svg')%>"
+             alt="изменить аватар">
+        <img class="profile__avatar"
+             src="<%=require('./images/logo.svg')%>"
+             alt="моя фотография">
+      </button>
       <div id="profileData" class="profile__data">
         <h1 id="profileTitle" class="profile__title">Жак-Ив Кусто</h1>
         <button class="button profile__data-change" type="button"></button>
@@ -42,7 +48,9 @@
                    class="element__icon"
                    src="<%=require('./images/heart.svg')%>"
                    alt="like">
+              <p class="element__likes-number"></p>
             </button>
+
           </div>
         </div>
       </template>
@@ -155,6 +163,36 @@
       </button>
       <img class="pop-up__image" src="#" alt="#">
       <p class="pop-up__caption"></p>
+    </div>
+  </div>
+  <!--Change Avatar Pop-UP-->
+  <div id="changeAvatar" class="pop-up">
+    <div class="pop-up__container">
+      <form id="avatarForm" name="new-avatar" class="form" novalidate>
+        <h3 class="form__name">Обновить аватар</h3>
+        <fieldset class="form__avatar">
+          <input
+                 type="url"
+                 class="form__input"
+                 name="avatar-link"
+                 value=""
+                 placeholder="Ссылка на изображение"
+                 id="form__avatar"
+                 required>
+          <span class="form__avatar-error form__input-error"></span>
+        </fieldset>
+        <fieldset class="form__handlers">
+          <button id="avatarButton" class="form__button" type="submit" disabled>
+            Сохранить
+          </button>
+        </fieldset>
+      </form>
+      <button id="addClose" class="pop-up__closure" type="button">
+        <img
+             class="pop-up__close-icon"
+             src="<%=require('./images/closeicon.svg')%>"
+             alt="x">
+      </button>
     </div>
   </div>
 </body>
