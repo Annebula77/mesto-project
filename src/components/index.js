@@ -1,5 +1,5 @@
 import '../pages/index.css';
-import { serverData, getUserData, getServerCards, editProfileData, changeAvatar, postNewCard, deleteMyCard, putLike, deleteLike } from './api.js';
+import { serverData, getUserData, getServerCards, editProfileData, changeAvatar, postNewCard, deleteMyCard, putLike, deleteLike, checkResponse } from './api.js';
 import { openPopup, closePopup, closePopupByEsc } from '../components/modal.js';
 import { createDefaultCard } from './card.js';
 import { isValid, showInputError, hideInputError, hasInvalidInput, toggleButtonState, setEventListeners, blockSubmitButton, enableValidation } from './validtion.js';
@@ -17,7 +17,7 @@ Promise.all([getUserData(), getServerCards()])
 
   // добавление карточек c сервера
   cards.forEach((card) => {
-       cardsList.prepend(createDefaultCard(card, profile));
+       cardsList.prepend(createDefaultCard(card, profile, card.likes.length));
       });
 })
 

@@ -8,18 +8,20 @@ const serverData = {
   },
 };
 
+const checkResponse = (res) => {
+  if (res.ok) {
+    return res.json();
+  }
+  return Promise.reject(`Ошибка: ${res.status}`);
+};
+
 //получение своих данных с сервера
 const getUserData = () => {
   return fetch(`${serverData.serverUrl}/users/me`, {
     headers: serverData.headers
    })
-   .then((res) => {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Ошибка: ${res.status}`);
-  });
-}
+   .then(res => checkResponse(res))
+  };
 
 //изменение личных данных
 const editProfileData = (name, about) => {
@@ -31,13 +33,8 @@ const editProfileData = (name, about) => {
       about: about
     })
    })
-   .then(res => {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Ошибка: ${res.status}`);
-  });
- }
+   .then(res => checkResponse(res))
+ };
 
 //изменение аватара
 const changeAvatar = (avatar) => {
@@ -48,12 +45,7 @@ const changeAvatar = (avatar) => {
       avatar: avatar
     }),
    })
-   .then(res => {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Ошибка: ${res.status}`);
-  });
+   .then(res => checkResponse(res));
  }
 
 //получение дефолтных карточек с сервера
@@ -61,13 +53,8 @@ const getServerCards = () => {
   return fetch(`${serverData.serverUrl}/cards`, {
     headers: serverData.headers
    })
-   .then((res) => {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Ошибка: ${res.status}`);
-  });
-}
+   .then(res => checkResponse(res))
+};
 
 //публикация новых карточек на сервер
  const postNewCard = (name, link) => {
@@ -79,12 +66,7 @@ const getServerCards = () => {
       link: link
     })
    })
-   .then(res => {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Ошибка: ${res.status}`);
-  });
+   .then(res => checkResponse(res));
  }
 
  //удаление карточек с сервера
@@ -101,13 +83,8 @@ const getServerCards = () => {
     method: 'PUT',
     headers: serverData.headers
     })
-   .then(res => {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Ошибка: ${res.status}`);
-  });
- }
+    .then(res => checkResponse(res))
+ };
 
  //убрать лайк с карточки
  const deleteLike = (cardId) => {
@@ -115,13 +92,8 @@ const getServerCards = () => {
     method: 'DELETE',
     headers: serverData.headers
     })
-   .then(res => {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Ошибка: ${res.status}`);
-  });
+    .then(res => checkResponse(res));
  }
 
 
-export { serverData, getUserData, getServerCards, editProfileData, changeAvatar, postNewCard, deleteMyCard, putLike, deleteLike };
+export { serverData, getUserData, getServerCards, editProfileData, changeAvatar, postNewCard, deleteMyCard, putLike, deleteLike, checkResponse };
