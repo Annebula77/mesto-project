@@ -41,6 +41,11 @@ const cardsList = document.querySelector('.elements');
 const cardTemplate = document.querySelector('#cardTemplate').content;
 const cardBlock = cardTemplate.querySelector('.element').cloneNode(true);
 
+// переменные pop-up подтверждения удаления карточки
+
+const confirmDelete = document.querySelector('#confirmChoice');
+const confirmDeleteBtn = document.querySelector('#confirmDelete');
+
 
 
 //объект валидации
@@ -54,4 +59,4 @@ const settings = {
   };
 
 
-export { profilePopup, profile, avatar, avatarForm, profileSubmitBtn, avatarChangeBtn, avatarInput, avatarSubmitBtn, popupAvatar, formElement, popupButtonOpen, profileName, profileJob, nameInput, jobInput, buttonOpenPopupCard, cardAddPopup, cardAddFormElement, placeInput, linkInput, imageModal, imagePop, captionPop, closeButtons, modalWindows, cardsList, cardTemplate, cardBlock, settings, cardSubmitButton }
+export { profilePopup, profile, avatar, confirmDelete, confirmDeleteBtn, avatarForm, profileSubmitBtn, avatarChangeBtn, avatarInput, avatarSubmitBtn, popupAvatar, formElement, popupButtonOpen, profileName, profileJob, nameInput, jobInput, buttonOpenPopupCard, cardAddPopup, cardAddFormElement, placeInput, linkInput, imageModal, imagePop, captionPop, closeButtons, modalWindows, cardsList, cardTemplate, cardBlock, settings, cardSubmitButton }

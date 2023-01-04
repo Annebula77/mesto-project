@@ -34,10 +34,14 @@
 @import url(../blocks/pop-up/__closure/pop-up__closure.css);
 @import url(../blocks/pop-up/__closure-image/pop-up__closure-image.css);
 @import url(../blocks/pop-up/__container-image/pop-up__container-image.css);
+@import url(../blocks/pop-up/__container/_background/pop-up__container_background.css);
+@import url(../blocks/pop-up/__wrapper/pop-up__wrapper.css);
 @import url(../blocks/pop-up/__close-icon/pop-up__close-icon.css);
 @import url(../blocks/pop-up/__image/pop-up__image.css);
 @import url(../blocks/pop-up/__caption/pop-up__caption.css);
 @import url(../blocks/pop-up/_opacity/pop-up_opacity.css);
+@import url(../blocks/pop-up/__closure/_confirm/pop-up__closure_confrim.css);
+@import url(../blocks/pop-up/__title/pop-up__title.css);
 @import url(../blocks/form/form.css);
 @import url(../blocks/form/__name/form__name.css);
 @import url(../blocks/form/__personal-data/form__personal-data.css);

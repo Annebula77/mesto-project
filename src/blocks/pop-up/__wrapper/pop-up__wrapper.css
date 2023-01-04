@@ -1,0 +1,19 @@
+.pop-up__wrapper {
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 34px 36px 36px;
+  padding: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .pop-up__wrapper {
+    max-width: 282px;
+    margin: 0;
+    padding: 10px 22px 22px;
+  }
+}

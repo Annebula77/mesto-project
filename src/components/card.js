@@ -1,6 +1,7 @@
-import { captionPop, imagePop, cardBlock} from './utils.js';
+import { captionPop, imagePop, cardBlock, confirmDelete, confirmDeleteBtn} from './utils.js';
 import { openImageModal } from './index.js';
 import { deleteMyCard, putLike, deleteLike } from './api.js';
+import { closePopup, openPopup } from './modal.js';
 
 
  // создание шаблона для карточек
@@ -48,11 +49,15 @@ import { deleteMyCard, putLike, deleteLike } from './api.js';
   if (me.id === card.owner._id) {
      wasteBin.classList.add('element__remove_active');
   }
-    wasteBin.addEventListener("click", () => {
-      deleteMyCard(card._id)
-    .then(data => {
-      defaultCard.remove()
-    })
+    wasteBin.addEventListener('click', () => {
+      openPopup(confirmDelete);
+      confirmDeleteBtn.addEventListener('click', () => {
+        deleteMyCard(card._id)
+        .then(data => {
+          defaultCard.remove()
+        });
+        closePopup(confirmDelete);
+      })
     .catch((err) => {
       console.error(err);
     })
