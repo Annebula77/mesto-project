@@ -1,7 +1,24 @@
-import { captionPop, imagePop, cardBlock, confirmDelete, confirmDeleteBtn} from './utils.js';
-import { openImageModal } from './index.js';
-import { deleteMyCard, putLike, deleteLike } from './api.js';
-import { closePopup, openPopup } from './modal.js';
+import { captionPop, imagePop, cardBlock, openConfirmDelete} from './utils.js';
+import { openImageModal, handleDislike, handleLike} from './index.js';
+
+
+//функция лайка карточки
+function likePlace(defaultCard, likeCount, me) {
+  const likeCard = defaultCard.querySelector('.element__like');
+  const likeNumber = defaultCard.querySelector('.element__likes-number');
+  if (likeCount.length !== 0) {
+    likeCount.forEach((user) => {
+      if (user._id === me.id) {
+        likeCard.classList.add('element__like_active');
+      } else {
+        likeCard.classList.remove('element__like_active');
+      }
+    });
+  } else {
+    likeCard.classList.remove('element__like_active');
+  }
+  likeNumber.textContent = likeCount.length;
+}
 
 
  // создание шаблона для карточек
@@ -10,7 +27,6 @@ import { closePopup, openPopup } from './modal.js';
   const cardImage = defaultCard.querySelector('.element__image');
   const cardTitle = defaultCard.querySelector('.element__title');
   const likeCard = defaultCard.querySelector('.element__like');
-  const likeNumber = defaultCard.querySelector('.element__likes-number');
   const wasteBin = defaultCard.querySelector('.element__remove');
       cardImage.src = card.link;
   cardImage.alt = card.name;
@@ -22,49 +38,24 @@ import { closePopup, openPopup } from './modal.js';
     openImageModal (cardImage, cardTitle);
   });
 
-  likeCard.addEventListener("click", function (evt) {
-    if (!evt.target.classList.contains('element__like_active')) {
-      evt.target.classList.add('element__like_active');
-      putLike(card._id)
-        .then((userData) => {
-          likeNumber.textContent = userData.likes.length
-        })
-        .catch((err) => {
-          console.error(err);
-        })
+  likeCard.addEventListener("click", () => {
+    if (!likeCard.classList.contains('element__like_active')) {
+      handleLike(defaultCard, card, me);
     } else {
-      evt.target.classList.remove('element__like_active');
-      deleteLike(card._id)
-        .then((userData) => {
-          likeNumber.textContent = userData.likes.length;
-          })
-        .catch((err) => {
-          console.error(err);
-        })
+      handleDislike(defaultCard, card, me);
     }
   });
-  likeNumber.textContent = card.likes.length;
-
+  likePlace(defaultCard, card.likes, me);
 
   if (me.id === card.owner._id) {
      wasteBin.classList.add('element__remove_active');
-  }
-    wasteBin.addEventListener('click', () => {
-      openPopup(confirmDelete);
-      confirmDeleteBtn.addEventListener('click', () => {
-        deleteMyCard(card._id)
-        .then(data => {
-          defaultCard.remove()
-        });
-        closePopup(confirmDelete);
-      })
-    .catch((err) => {
-      console.error(err);
-    })
-    });
+     }
+     defaultCard.dataset.id = card._id;
+    wasteBin.addEventListener('click', openConfirmDelete);
 
-        return defaultCard;
-};
+      return defaultCard;
+    };
 
 
-export { createDefaultCard};
+
+export { createDefaultCard, likePlace };
