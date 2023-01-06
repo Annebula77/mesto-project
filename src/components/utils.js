@@ -1,3 +1,4 @@
+import {openPopup} from './modal.js';
 
 // переменные попапа профиля
 const profilePopup = document.querySelector('#profilePopup');
@@ -41,10 +42,17 @@ const cardsList = document.querySelector('.elements');
 const cardTemplate = document.querySelector('#cardTemplate').content;
 const cardBlock = cardTemplate.querySelector('.element').cloneNode(true);
 
-// переменные pop-up подтверждения удаления карточки
+// Подтверждение удаления карточки
 
 const confirmDelete = document.querySelector('#confirmChoice');
 const confirmDeleteBtn = document.querySelector('#confirmDelete');
+let cardForDelete = null;
+const openConfirmDelete = (evt) => {
+  cardForDelete = evt.target.closest('.element');
+  //console.log(cardForDelete);
+  openPopup(confirmDelete);
+}
+const deleteCard = (cardForDelete) => {cardForDelete.remove()};
 
 
 
@@ -59,4 +67,4 @@ const settings = {
   };
 
 
-export { profilePopup, profile, avatar, confirmDelete, confirmDeleteBtn, avatarForm, profileSubmitBtn, avatarChangeBtn, avatarInput, avatarSubmitBtn, popupAvatar, formElement, popupButtonOpen, profileName, profileJob, nameInput, jobInput, buttonOpenPopupCard, cardAddPopup, cardAddFormElement, placeInput, linkInput, imageModal, imagePop, captionPop, closeButtons, modalWindows, cardsList, cardTemplate, cardBlock, settings, cardSubmitButton }
+export { profilePopup, profile, avatar, confirmDelete, confirmDeleteBtn, cardForDelete, deleteCard, openConfirmDelete, avatarForm, profileSubmitBtn, avatarChangeBtn, avatarInput, avatarSubmitBtn, popupAvatar, formElement, popupButtonOpen, profileName, profileJob, nameInput, jobInput, buttonOpenPopupCard, cardAddPopup, cardAddFormElement, placeInput, linkInput, imageModal, imagePop, captionPop, closeButtons, modalWindows, cardsList, cardTemplate, cardBlock, settings, cardSubmitButton }

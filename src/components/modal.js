@@ -1,4 +1,4 @@
-import { profilePopup, cardAddPopup, imageModal, modalWindows } from './utils.js';
+import { modalWindows } from './utils.js';
 
 //функции открытия и закрытия поапа профиля
 function openPopup (popup) {

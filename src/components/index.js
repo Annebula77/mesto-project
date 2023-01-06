@@ -1,9 +1,10 @@
 import '../pages/index.css';
 import { serverData, getUserData, getServerCards, editProfileData, changeAvatar, postNewCard, deleteMyCard, putLike, deleteLike, checkResponse } from './api.js';
 import { openPopup, closePopup, closePopupByEsc } from '../components/modal.js';
-import { createDefaultCard } from './card.js';
-import { isValid, showInputError, hideInputError, hasInvalidInput, toggleButtonState, setEventListeners, blockSubmitButton, enableValidation } from './validtion.js';
-import { cardsList, cardTemplate, cardBlock, confirmDeleteBtn, confirmDelete, avatarForm, profile, profileSubmitBtn, avatar, avatarInput, avatarChangeBtn, avatarSubmitBtn, popupAvatar, profilePopup, formElement, popupButtonOpen, profileName, profileJob, nameInput, jobInput, buttonOpenPopupCard, cardAddPopup, cardAddFormElement, placeInput, linkInput, imageModal, imagePop, captionPop, closeButtons, modalWindows, submitButton, settings, cardSubmitButton } from './utils.js';
+import { createDefaultCard, likePlace } from './card.js';
+import { isValid, showInputError, hideInputError, hasInvalidInput, setEventListeners, blockSubmitButton, enableValidation } from './validtion.js';
+import { cardsList, cardTemplate, cardBlock, confirmDeleteBtn, confirmDelete, cardForDelete, deleteCard,   openConfirmDelete, avatarForm, profile, profileSubmitBtn, avatar, avatarInput, avatarChangeBtn, avatarSubmitBtn, popupAvatar, profilePopup, formElement, popupButtonOpen, profileName, profileJob, nameInput, jobInput, buttonOpenPopupCard, cardAddPopup, cardAddFormElement, placeInput, linkInput, imageModal, imagePop, captionPop, closeButtons, modalWindows, submitButton, settings, cardSubmitButton } from './utils.js';
+
 
 
 //Данные из промисов (вторые then)
@@ -17,10 +18,10 @@ Promise.all([getUserData(), getServerCards()])
 
   // добавление карточек c сервера
   cards.forEach((card) => {
-       cardsList.prepend(createDefaultCard(card, profile, card.likes.length));
+    const defaultCard = createDefaultCard(card, profile);
+    cardsList.append(defaultCard);
       });
 })
-
 .catch((err) => {
   console.error(err);
 })
@@ -32,11 +33,21 @@ Promise.all([getUserData(), getServerCards()])
     profileSubmitBtn.textContent = 'Сохранение...';
     profileName.textContent = nameInput.value;
     profileJob.textContent = jobInput.value;
-    editProfileData(nameInput.value, jobInput.value).finally(() => {
+    editProfileData(nameInput.value, jobInput.value)
+    .then((data) => {
+      profileName.textContent = data.name;
+      profileJob.textContent = data.about;
+      closePopup(profilePopup);
+    })
+
+    .catch((err) => {
+      console.error(err);
+    })
+    .finally(() => {
       profileSubmitBtn.textContent = "Сохранить";
+
     });
-    closePopup(profilePopup);
-       };
+          };
 
 // функция обработки формы изменения аватара
        function addNewAvatar (evt) {
@@ -47,6 +58,7 @@ Promise.all([getUserData(), getServerCards()])
           console.log(avatarValue);
           avatar.src = me.avatar;
           avatar.alt = me.avatar;
+          closePopup(popupAvatar);
           })
           .catch((err) => {
             console.error(err);
@@ -54,9 +66,44 @@ Promise.all([getUserData(), getServerCards()])
         .finally(() => {
           avatarSubmitBtn.textContent = "Сохранить";
         });
-        closePopup(popupAvatar);
-       }
+               }
        avatarForm.addEventListener('submit', addNewAvatar);
+
+
+       export function handleLike(defaultCard, card, profile) {
+        putLike(card._id)
+          .then((data) => {
+            likePlace(defaultCard, data.likes, profile);
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      }
+
+
+      confirmDeleteBtn.addEventListener('click', function() {
+        deleteMyCard(cardForDelete.dataset.id)
+          .then(() => {
+            deleteCard(cardForDelete)
+            closePopup(confirmDelete)
+          })
+          .catch((err) => {
+            console.error(err);
+      });
+    })
+
+
+       export function handleDislike(defaultCard, card, profile) {
+        deleteLike(card._id)
+        .then((data) => {
+          likePlace(defaultCard, data.likes, profile);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
+
+
 
     //добавление новой карточки из формы
 export function addNewCard (evt) {
@@ -117,6 +164,9 @@ closeButtons.forEach((button) => {
 
    //обработчик кнопки сохранить для пользовательских карточек
    cardAddFormElement.addEventListener('submit', addNewCard);
+
+   // обработчик удаления карточки после подтверждения
+
 
 
 
