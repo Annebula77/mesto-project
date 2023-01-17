@@ -1,4 +1,3 @@
-import { modalWindows } from './utils.js';
 
 //функции открытия и закрытия поапа профиля
 function openPopup (popup) {
@@ -10,15 +9,6 @@ function closePopup (popup) {
    popup.classList.remove('pop-up_opened');
    document.removeEventListener('keydown', closePopupByEsc);
 };
-
-// закрытие поапов при клике на оверлей
-modalWindows.forEach((item) => {
-  item.addEventListener('mousedown', function(e) {
-    if (e.target === item) {
-      closePopup(item);
-    }
-  })
-});
 
 // функция закрытия попапа при нажатии кнопки escape
 

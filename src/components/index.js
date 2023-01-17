@@ -167,6 +167,14 @@ closeButtons.forEach((button) => {
 
    // обработчик удаления карточки после подтверждения
 
+   // закрытие поапов при клике на оверлей
+modalWindows.forEach((item) => {
+  item.addEventListener('mousedown', function(e) {
+    if (e.target === item) {
+      closePopup(item);
+    }
+  })
+});
 
 
 
