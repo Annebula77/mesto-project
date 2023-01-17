@@ -1,5 +1,4 @@
-import { captionPop, imagePop, cardBlock, openConfirmDelete} from './utils.js';
-import { openImageModal, handleDislike, handleLike} from './index.js';
+import { captionPop, imagePop, cardBlock} from './utils.js';
 
 
 //функция лайка карточки
@@ -8,7 +7,7 @@ function likePlace(defaultCard, likeCount, me) {
   const likeNumber = defaultCard.querySelector('.element__likes-number');
   if (likeCount.length !== 0) {
     likeCount.forEach((user) => {
-      if (user._id === me.id) {
+      if (user._id.includes(me.id)) {
         likeCard.classList.add('element__like_active');
       } else {
         likeCard.classList.remove('element__like_active');
@@ -22,7 +21,7 @@ function likePlace(defaultCard, likeCount, me) {
 
 
  // создание шаблона для карточек
- function createDefaultCard(card, me) {
+ function createDefaultCard(card, me, handleLike, handleDislike, openImageModal, openConfirmDelete) {
   const defaultCard = cardBlock.cloneNode(true);
   const cardImage = defaultCard.querySelector('.element__image');
   const cardTitle = defaultCard.querySelector('.element__title');
@@ -35,7 +34,7 @@ function likePlace(defaultCard, likeCount, me) {
     imagePop.src = cardImage.src;
     imagePop.alt = cardTitle.textContent;
     captionPop.textContent = cardTitle.textContent;
-    openImageModal (cardImage, cardTitle);
+    openImageModal(cardImage, cardTitle);
   });
 
   likeCard.addEventListener("click", () => {
@@ -45,12 +44,13 @@ function likePlace(defaultCard, likeCount, me) {
       handleDislike(defaultCard, card, me);
     }
   });
-  likePlace(defaultCard, card.likes, me);
+  likePlace(defaultCard, card.likes, me, handleLike, handleDislike);
 
   if (me.id === card.owner._id) {
      wasteBin.classList.add('element__remove_active');
-     }
      defaultCard.dataset.id = card._id;
+    }
+
     wasteBin.addEventListener('click', openConfirmDelete);
 
       return defaultCard;

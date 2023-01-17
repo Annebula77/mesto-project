@@ -18,7 +18,7 @@ Promise.all([getUserData(), getServerCards()])
 
   // добавление карточек c сервера
   cards.forEach((card) => {
-    const defaultCard = createDefaultCard(card, profile);
+    const defaultCard = createDefaultCard(card, profile, handleLike, handleDislike, openImageModal, openConfirmDelete);
     cardsList.append(defaultCard);
       });
 })
@@ -70,7 +70,7 @@ Promise.all([getUserData(), getServerCards()])
        avatarForm.addEventListener('submit', addNewAvatar);
 
 
-       export function handleLike(defaultCard, card, profile) {
+       function handleLike(defaultCard, card, profile) {
         putLike(card._id)
           .then((data) => {
             likePlace(defaultCard, data.likes, profile);
