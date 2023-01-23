@@ -64,7 +64,17 @@ const settings = {
   inactiveButtonClass: 'form__button_inactive',
   inputErrorClass: 'form__input_type_error',
   errorClass: 'form__input-error_active'
-  };
+};
 
+//Токен для API
+export const token = 'dc3d0102-85f5-46b6-8a3a-9a4f53b03533';
+//Конфиг для API
+export const cfg= {
+    url: 'https://mesto.nomoreparties.co/v1/plus-cohort-17/',
+    headers: {
+        authorization: token,
+        'Content-Type': 'application/json',
+    },
+};
 
 export { profilePopup, profile, avatar, confirmDelete, confirmDeleteBtn, cardForDelete, deleteCard, openConfirmDelete, avatarForm, profileSubmitBtn, avatarChangeBtn, avatarInput, avatarSubmitBtn, popupAvatar, formElement, popupButtonOpen, profileName, profileJob, nameInput, jobInput, buttonOpenPopupCard, cardAddPopup, cardAddFormElement, placeInput, linkInput, imageModal, imagePop, captionPop, closeButtons, modalWindows, cardsList, cardTemplate, cardBlock, settings, cardSubmitButton }
