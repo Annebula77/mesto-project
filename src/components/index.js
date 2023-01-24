@@ -44,7 +44,6 @@ import UserInfo from './UserInfo.js';
 const api = new Api(cfg);
 //Класс UserInfo
 const userInfo = new UserInfo('#profileTitle', '#profileSubtitle', '.profile__avatar');
-console.log(userInfo);
 
 //Данные из промисов (вторые then)
 Promise.all([api.getUserData(), api.getServerCards()])
