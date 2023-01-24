@@ -1,12 +1,12 @@
 import '../pages/index.css';
 import { openPopup, closePopup } from '../components/modal.js';
 import { createDefaultCard, likePlace } from './card.js';
-import { blockSubmitButton, enableValidation } from './validtion.js';
+import FormValidator from './FormValidator.js';
 import { cardsList,
   confirmDeleteBtn,
   confirmDelete,
   cardForDelete,
-  deleteCard,  
+  deleteCard,
   openConfirmDelete,
   avatarForm,
   profile,
@@ -41,6 +41,7 @@ import Api from './Api.js';
 
 //Класс API
 const api = new Api(cfg);
+
 
 //Данные из промисов (вторые then)
 Promise.all([api.getUserData(), api.getServerCards()])
@@ -163,8 +164,7 @@ avatarChangeBtn.addEventListener('click', function() {
 
 buttonOpenPopupCard.addEventListener('click', function () {
   openPopup(cardAddPopup);
-  blockSubmitButton(settings, cardSubmitButton);
-});
+  });
 
 // обработчики открытия поапа
 popupButtonOpen.addEventListener('click', function () {
@@ -198,4 +198,8 @@ modalWindows.forEach((item) => {
   })
 });
 
-enableValidation(settings);
+[...document.forms].forEach((formElement) => {
+  const formValidator = new FormValidator(settings, formElement)
+  formValidator.enableValidation();
+})
+
