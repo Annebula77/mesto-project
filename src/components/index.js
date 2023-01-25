@@ -38,18 +38,18 @@ import { cardsList,
   cfg
 } from './utils.js';
 import Api from './Api.js';
+import UserInfo from './UserInfo.js';
 
 //Класс API
 const api = new Api(cfg);
+//Класс UserInfo
+const userInfo = new UserInfo('#profileTitle', '#profileSubtitle', '.profile__avatar');
 
 //Данные из промисов (вторые then)
 Promise.all([api.getUserData(), api.getServerCards()])
 .then(([me, cards]) => {
   // данные из профиля
-  profile.id = me._id;
-  profileName.textContent = me.name;
-  profileJob.textContent = me.about;
-  avatar.src = me.avatar;
+  userInfo.setUserInfo(me);
 
   // добавление карточек c сервера
   cards.forEach((card) => {
@@ -69,8 +69,7 @@ function changeProfileData (evt) {
   profileJob.textContent = jobInput.value;
   api.editProfileData(nameInput.value, jobInput.value)
   .then((data) => {
-    profileName.textContent = data.name;
-    profileJob.textContent = data.about;
+    userInfo.setUserInfo(data);
     closePopup(profilePopup);
   })
   .catch((err) => {
@@ -86,10 +85,8 @@ function addNewAvatar (evt) {
   evt.preventDefault();
   avatarSubmitBtn.textContent = 'Сохранение...';
   const avatarValue = avatarInput.value;
-  api.changeAvatar(avatarValue).then((me) => {
-    console.log(avatarValue);
-    avatar.src = me.avatar;
-    avatar.alt = me.avatar;
+  api.changeAvatar(avatarValue).then((data) => {
+    userInfo.setUserInfo(data);
     closePopup(popupAvatar);
     })
   .catch((err) => {
