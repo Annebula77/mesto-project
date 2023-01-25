@@ -1,7 +1,7 @@
-import '../pages/index.css';
+import './index.css';
 import { openPopup, closePopup } from '../components/modal.js';
-import { createDefaultCard, likePlace } from './card.js';
-import FormValidator from './FormValidator.js';
+import { createDefaultCard, likePlace } from '../components/card.js';
+import FormValidator from '../components/FormValidator.js';
 import { cardsList,
   confirmDeleteBtn,
   confirmDelete,
@@ -36,9 +36,9 @@ import { cardsList,
   settings,
   cardSubmitButton,
   cfg
-} from './utils.js';
-import Api from './Api.js';
-import UserInfo from './UserInfo.js';
+} from '../utils/utils.js';
+import Api from '../components/Api.js';
+import UserInfo from '../components/UserInfo.js';
 
 //Класс API
 const api = new Api(cfg);

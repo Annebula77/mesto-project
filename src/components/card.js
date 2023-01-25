@@ -1,4 +1,4 @@
-import { captionPop, imagePop, cardBlock} from './utils.js';
+import { captionPop, imagePop, cardBlock} from '../utils/utils.js';
 
 
 //функция лайка карточки

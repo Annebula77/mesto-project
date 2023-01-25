@@ -1,4 +1,4 @@
-import {openPopup} from './modal.js';
+import {openPopup} from '../components/modal.js';
 
 // переменные попапа профиля
 const profilePopup = document.querySelector('#profilePopup');
@@ -77,4 +77,40 @@ export const cfg= {
     },
 };
 
-export { profilePopup, profile, avatar, confirmDelete, confirmDeleteBtn, cardForDelete, deleteCard, openConfirmDelete, avatarForm, profileSubmitBtn, avatarChangeBtn, avatarInput, avatarSubmitBtn, popupAvatar, formElement, popupButtonOpen, profileName, profileJob, nameInput, jobInput, buttonOpenPopupCard, cardAddPopup, cardAddFormElement, placeInput, linkInput, imageModal, imagePop, captionPop, closeButtons, modalWindows, cardsList, cardTemplate, cardBlock, settings, cardSubmitButton }
+export {
+  profilePopup,
+  profile,
+  avatar,
+  confirmDelete,
+  confirmDeleteBtn,
+  cardForDelete,
+  deleteCard,
+  openConfirmDelete,
+  avatarForm,
+  profileSubmitBtn,
+  avatarChangeBtn,
+  avatarInput,
+  avatarSubmitBtn,
+  popupAvatar,
+  formElement,
+  popupButtonOpen,
+  profileName,
+  profileJob,
+  nameInput,
+  jobInput,
+  buttonOpenPopupCard,
+  cardAddPopup,
+  cardAddFormElement,
+  placeInput,
+  linkInput,
+  imageModal,
+  imagePop,
+  captionPop,
+  closeButtons,
+  modalWindows,
+  cardsList,
+  cardTemplate,
+  cardBlock,
+  settings,
+  cardSubmitButton
+}
