@@ -35,7 +35,7 @@ function likePlace(defaultCard, likeCount, me) {
     imagePop.src = cardImage.src;
     imagePop.alt = cardImage.alt;
     captionPop.textContent = cardTitle.textContent;
-        handleBigImage(cardImage, cardTitle);
+        handleBigImage();
      });
 
   likeCard.addEventListener("click", () => {

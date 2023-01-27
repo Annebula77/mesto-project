@@ -1,6 +1,7 @@
 import './index.css';
 import Popup from '../components/Popup.js';
 import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithForm from '../components/PopupWithForm.js';
 import { createDefaultCard, likePlace } from '../components/card.js';
 import FormValidator from '../components/FormValidator.js';
 import { cardsList,
@@ -35,6 +36,7 @@ import { cardsList,
   settings,
   cardSubmitButton,
   cfg,
+  closeXBtn
 } from '../utils/utils.js';
 import Api from '../components/Api.js';
 import UserInfo from '../components/UserInfo.js';
@@ -42,26 +44,26 @@ import UserInfo from '../components/UserInfo.js';
 //Класс API
 const api = new Api(cfg);
 //Класс UserInfo
-const userInfo = new UserInfo('#profileTitle', '#profileSubtitle', '.profile__avatar');
-export const popupWithImage = new PopupWithImage(imageModal);
+const userInfo = new UserInfo(profileName, profileJob, avatar);
+export const popupWithImage = new PopupWithImage(imageModal, imagePop, captionPop);
 
-export const handleBigImage = (image, caption) => {
-  popupWithImage.openPopup(image,caption);
-  popupWithImage.setEventListeners();
+const popupChangeData = new PopupWithForm(profilePopup, changeProfileData);
+const popupChangeAvatar = new PopupWithForm(popupAvatar, addNewAvatar);
+const popupAddUserCard = new PopupWithForm(cardAddPopup, addNewCard);
+
+export const handleBigImage = () => {
+ popupWithImage.openPopup();
+popupWithImage.setEventListeners();
 }
-
-
-
 
 //Данные из промисов (вторые then)
 Promise.all([api.getUserData(), api.getServerCards()])
 .then(([me, cards]) => {
   // данные из профиля
-  userInfo.setUserInfo(me);
-
-  // добавление карточек c сервера
+    userInfo.setUserInfo(me);
+    // добавление карточек c сервера
   cards.forEach((card) => {
-    const defaultCard = createDefaultCard(card, profile,  handleLike, handleDislike, openConfirmDelete, handleBigImage);
+    const defaultCard = createDefaultCard(card, handleLike, handleDislike, openConfirmDelete, handleBigImage);
     cardsList.append(defaultCard);
   });
 })
@@ -78,7 +80,8 @@ function changeProfileData (evt) {
   api.editProfileData(nameInput.value, jobInput.value)
   .then((data) => {
     userInfo.setUserInfo(data);
-    closePopup(profilePopup);
+    popupChangeData.closePopup(profilePopup);
+    popupChangeData.setEventListeners();
   })
   .catch((err) => {
     console.error(err);
@@ -95,7 +98,7 @@ function addNewAvatar (evt) {
   const avatarValue = avatarInput.value;
   api.changeAvatar(avatarValue).then((data) => {
     userInfo.setUserInfo(data);
-    closePopup(popupAvatar);
+    popupChangeAvatar.closePopup(popupAvatar);
     })
   .catch((err) => {
     console.error(err);
@@ -144,7 +147,7 @@ export function addNewCard (evt) {
   .then((card) => {
     cardAddFormElement.reset();
     cardsList.prepend(createDefaultCard(card, profile));
-    closePopup(cardAddPopup);
+    popupAddUserCard.closePopup(cardAddPopup);
   })
   .catch((err) => {
     console.error(err);
@@ -156,16 +159,16 @@ export function addNewCard (evt) {
 
 
 avatarChangeBtn.addEventListener('click', function() {
-  openPopup(popupAvatar);
+  popupChangeAvatar.openPopup(popupAvatar);
 });
 
 buttonOpenPopupCard.addEventListener('click', function () {
-  openPopup(cardAddPopup);
+  popupAddUserCard.openPopup(cardAddPopup);
   });
 
 // обработчики открытия поапа
 popupButtonOpen.addEventListener('click', function () {
-  openPopup(profilePopup);
+  popupChangeData.openPopup(profilePopup);
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
 });
