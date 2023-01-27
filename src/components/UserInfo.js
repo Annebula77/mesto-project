@@ -20,5 +20,8 @@ export default class UserInfo {
         if(data.avatar) {
             this._avatar.src = data.avatar;
         }
+        if(data._id) {
+            this._myId = data._id;
+        }
     }
 }
