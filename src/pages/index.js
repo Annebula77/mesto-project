@@ -1,5 +1,6 @@
 import './index.css';
-import { openPopup, closePopup } from '../components/modal.js';
+import Popup from '../components/Popup.js';
+import PopupWithImage from '../components/PopupWithImage.js';
 import { createDefaultCard, likePlace } from '../components/card.js';
 import FormValidator from '../components/FormValidator.js';
 import { cardsList,
@@ -31,11 +32,9 @@ import { cardsList,
   imageModal,
   imagePop,
   captionPop,
-  closeButtons,
-  modalWindows,
   settings,
   cardSubmitButton,
-  cfg
+  cfg,
 } from '../utils/utils.js';
 import Api from '../components/Api.js';
 import UserInfo from '../components/UserInfo.js';
@@ -44,6 +43,15 @@ import UserInfo from '../components/UserInfo.js';
 const api = new Api(cfg);
 //Класс UserInfo
 const userInfo = new UserInfo('#profileTitle', '#profileSubtitle', '.profile__avatar');
+export const popupWithImage = new PopupWithImage(imageModal);
+
+export const handleBigImage = (image, caption) => {
+  popupWithImage.openPopup(image,caption);
+  popupWithImage.setEventListeners();
+}
+
+
+
 
 //Данные из промисов (вторые then)
 Promise.all([api.getUserData(), api.getServerCards()])
@@ -53,7 +61,7 @@ Promise.all([api.getUserData(), api.getServerCards()])
 
   // добавление карточек c сервера
   cards.forEach((card) => {
-    const defaultCard = createDefaultCard(card, profile, handleLike, handleDislike, openImageModal, openConfirmDelete);
+    const defaultCard = createDefaultCard(card, profile,  handleLike, handleDislike, openConfirmDelete, handleBigImage);
     cardsList.append(defaultCard);
   });
 })
@@ -146,13 +154,6 @@ export function addNewCard (evt) {
   });
 };
 
-//модальное окно увеличенного изображения
-export function openImageModal (cardImage, cardTitle) {
-  imagePop.src = cardImage.src;
-  imagePop.alt = cardImage.alt;
-  captionPop.textContent = cardTitle.textContent;
-  openPopup(imageModal);
-}
 
 avatarChangeBtn.addEventListener('click', function() {
   openPopup(popupAvatar);
@@ -169,13 +170,6 @@ popupButtonOpen.addEventListener('click', function () {
   jobInput.value = profileJob.textContent;
 });
 
-// функция закрытия всех попапов
-closeButtons.forEach((button) => {
-  // находим 1 раз ближайший к крестику попап
-  const popup = button.closest('.pop-up');
-  // устанавливаем обработчик закрытия на крестик
-  button.addEventListener('click', () => closePopup(popup));
-});
 
 // обработчик кнопки в форме изменения профиля
 formElement.addEventListener('submit', changeProfileData);
@@ -186,13 +180,7 @@ cardAddFormElement.addEventListener('submit', addNewCard);
 //обработчик кнопки сохранить для аватара
 avatarForm.addEventListener('submit', addNewAvatar);
 
-modalWindows.forEach((item) => {
-  item.addEventListener('mousedown', function(e) {
-    if (e.target === item) {
-      closePopup(item);
-    }
-  })
-});
+
 
 [...document.forms].forEach((formElement) => {
   const formValidator = new FormValidator(settings, formElement)

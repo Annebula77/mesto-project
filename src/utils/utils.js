@@ -1,4 +1,3 @@
-import {openPopup} from '../components/modal.js';
 
 // переменные попапа профиля
 const profilePopup = document.querySelector('#profilePopup');
@@ -30,11 +29,6 @@ const imageModal = document.querySelector('#imagePopup');
 const imagePop = document.querySelector('.pop-up__image');
 const captionPop = document.querySelector('.pop-up__caption');
 
-// массив закрывающих кнопок попапов
-const closeButtons = document.querySelectorAll('.pop-up__closure');
-
-// массив из всех модальных окон
-const modalWindows = document.querySelectorAll('.pop-up');
 
 //переменные карточек
 
@@ -106,8 +100,6 @@ export {
   imageModal,
   imagePop,
   captionPop,
-  closeButtons,
-  modalWindows,
   cardsList,
   cardTemplate,
   cardBlock,
