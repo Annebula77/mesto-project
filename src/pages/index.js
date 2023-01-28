@@ -34,6 +34,7 @@ import { cardsList,
   captionPop,
   settings,
   cardSubmitButton,
+  avatar,
   cfg,
  } from '../utils/utils.js';
 import Api from '../components/Api.js';
@@ -64,8 +65,8 @@ Promise.all([api.getUserData(), api.getServerCards()])
   cards.forEach((card) => {
     const defaultCard = createDefaultCard(card, handleLike, handleDislike, openConfirmDelete, handleBigImage);
     cardsList.append(defaultCard);
-  });
-  //Ниже код для класса Section
+  })
+   //Ниже код для класса Section
   const section = new Section({
     items: cards,
     renderer: (item) => {
