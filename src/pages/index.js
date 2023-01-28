@@ -2,14 +2,11 @@ import './index.css';
 //import Popup from '../components/Popup.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithDelete from '../components/PopupWithDelete.js';
 import { createDefaultCard, likePlace } from '../components/card.js';
 import FormValidator from '../components/FormValidator.js';
 import { cardsList,
-  confirmDeleteBtn,
   confirmDelete,
-  cardForDelete,
-  openConfirmDelete,
-  deleteCard,
   avatarForm,
   profile,
   profileSubmitBtn,
@@ -50,6 +47,7 @@ export const popupWithImage = new PopupWithImage(imageModal, imagePop, captionPo
 const popupChangeData = new PopupWithForm(profilePopup, changeProfileData);
 const popupChangeAvatar = new PopupWithForm(popupAvatar, addNewAvatar);
 const popupAddUserCard = new PopupWithForm(cardAddPopup, addNewCard);
+const popupWithDelete = new PopupWithDelete(confirmDelete, confirmDel);
 
 export const handleBigImage = () => {
  popupWithImage.openPopup();
@@ -63,7 +61,7 @@ Promise.all([api.getUserData(), api.getServerCards()])
     userInfo.setUserInfo(me);
     // добавление карточек c сервера
   cards.forEach((card) => {
-    const defaultCard = createDefaultCard(card, handleLike, handleDislike, openConfirmDelete, handleBigImage);
+    const defaultCard = createDefaultCard(card, handleLike, handleDislike, handleBigImage);
     cardsList.append(defaultCard);
   })
    //Ниже код для класса Section
@@ -92,8 +90,7 @@ function changeProfileData (evt) {
   api.editProfileData(nameInput.value, jobInput.value)
   .then((data) => {
     userInfo.setUserInfo(data);
-    popupChangeData.closePopup(profilePopup);
-    popupChangeData.setEventListeners();
+    popupChangeData.closePopup();
   })
   .catch((err) => {
     console.error(err);
@@ -130,16 +127,20 @@ function handleLike(defaultCard, card, profile) {
   });
 }
 
-confirmDeleteBtn.addEventListener('click', function() {
-  api.deleteMyCard(cardForDelete.dataset.id)
+
+
+function confirmDel(card) {
+  api.deleteMyCard(card.dataset.id)
     .then(() => {
-      deleteCard(cardForDelete)
-      closePopup(confirmDelete)
+      card.remove();
+      popupWithDelete.closePopup();
     })
     .catch((err) => {
       console.error(err);
   });
-});
+};
+
+
 
 export function handleDislike(defaultCard, card, profile) {
   api.deleteLike(card._id)
@@ -159,7 +160,7 @@ export function addNewCard (evt) {
   .then((card) => {
     cardAddFormElement.reset();
     cardsList.prepend(createDefaultCard(card, profile));
-    popupAddUserCard.closePopup(cardAddPopup);
+    popupAddUserCard.closePopup();
   })
   .catch((err) => {
     console.error(err);
@@ -171,29 +172,28 @@ export function addNewCard (evt) {
 
 
 avatarChangeBtn.addEventListener('click', function() {
-  popupChangeAvatar.openPopup(popupAvatar);
+  popupChangeAvatar.openPopup();
 });
 
 buttonOpenPopupCard.addEventListener('click', function () {
-  popupAddUserCard.openPopup(cardAddPopup);
+  popupAddUserCard.openPopup();
   });
 
 // обработчики открытия поапа
 popupButtonOpen.addEventListener('click', function () {
-  popupChangeData.openPopup(profilePopup);
+  popupChangeData.openPopup();
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
 });
 
-
 // обработчик кнопки в форме изменения профиля
-formElement.addEventListener('submit', changeProfileData);
+//formElement.addEventListener('submit', changeProfileData);
 
 //обработчик кнопки сохранить для пользовательских карточек
-cardAddFormElement.addEventListener('submit', addNewCard);
+//cardAddFormElement.addEventListener('submit', addNewCard);
 
 //обработчик кнопки сохранить для аватара
-avatarForm.addEventListener('submit', addNewAvatar);
+//avatarForm.addEventListener('submit', addNewAvatar);
 
 
 

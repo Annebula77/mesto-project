@@ -38,15 +38,6 @@ const cardBlock = cardTemplate.querySelector('.element').cloneNode(true);
 // Подтверждение удаления карточки
 
 const confirmDelete = document.querySelector('#confirmChoice');
-const confirmDeleteBtn = document.querySelector('#confirmDelete');
-let cardForDelete = null;
-const openConfirmDelete = (evt) => {
-  cardForDelete = evt.target.closest('.element');
-  //console.log(cardForDelete);
-  openPopup(confirmDelete);
-}
-const deleteCard = (cardForDelete) => {cardForDelete.remove()};
-
 
 
 //объект валидации
@@ -75,10 +66,6 @@ export {
   profile,
   avatar,
   confirmDelete,
-  confirmDeleteBtn,
-  cardForDelete,
-  deleteCard,
-  openConfirmDelete,
   avatarForm,
   profileSubmitBtn,
   avatarChangeBtn,

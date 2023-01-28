@@ -22,12 +22,12 @@ function likePlace(defaultCard, likeCount, me) {
 
 
  // создание шаблона для карточек
- function createDefaultCard(card, me, handleLike, handleDislike, openConfirmDelete) {
+ function createDefaultCard(card, me, handleLike, handleDislike) {
   const defaultCard = cardBlock.cloneNode(true);
   const cardImage = defaultCard.querySelector('.element__image');
   const cardTitle = defaultCard.querySelector('.element__title');
   const likeCard = defaultCard.querySelector('.element__like');
-  const wasteBin = defaultCard.querySelector('.element__remove');
+  //const wasteBin = defaultCard.querySelector('.element__remove');
       cardImage.src = card.link;
   cardImage.alt = card.name;
   cardTitle.textContent = card.name;
@@ -46,14 +46,14 @@ function likePlace(defaultCard, likeCount, me) {
     }
   });
   likePlace(defaultCard, card.likes, me, handleLike, handleDislike);
-
+/*
   if (me.id === card.owner._id) {
      wasteBin.classList.add('element__remove_active');
      defaultCard.dataset.id = card._id;
     }
 
     wasteBin.addEventListener('click', openConfirmDelete);
-
+*/
       return defaultCard;
     };
 
