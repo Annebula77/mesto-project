@@ -29,8 +29,6 @@ const imageModal = document.querySelector('#imagePopup');
 const imagePop = document.querySelector('.pop-up__image');
 const captionPop = document.querySelector('.pop-up__caption');
 
-const closeXBtn = document.querySelector('.pop-up__closure');
-const popupIsOpened = document.querySelector('pop-up_opened');
 //переменные карточек
 
 const cardsList = document.querySelector('.elements');
@@ -106,6 +104,4 @@ export {
   cardBlock,
   settings,
   cardSubmitButton,
-  closeXBtn,
-  popupIsOpened
-}
+  }

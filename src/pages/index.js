@@ -1,5 +1,5 @@
 import './index.css';
-import Popup from '../components/Popup.js';
+//import Popup from '../components/Popup.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import { createDefaultCard, likePlace } from '../components/card.js';
@@ -36,8 +36,7 @@ import { cardsList,
   settings,
   cardSubmitButton,
   cfg,
-  closeXBtn
-} from '../utils/utils.js';
+ } from '../utils/utils.js';
 import Api from '../components/Api.js';
 import UserInfo from '../components/UserInfo.js';
 
