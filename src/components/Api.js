@@ -1,7 +1,7 @@
 export default class Api {
   constructor(options) {
     this._url = options.url;
-    this._headers = options.headers
+    this._headers = options.headers;
   }
   _checkResponse(res) {
     if (res.ok) {

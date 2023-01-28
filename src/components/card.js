@@ -1,4 +1,5 @@
-import { captionPop, imagePop, cardBlock} from '../utils/utils.js';
+import { imagePop, captionPop, cardBlock, imageModal} from '../utils/utils.js';
+import { handleBigImage } from '../pages/index.js';
 
 
 //функция лайка карточки
@@ -21,7 +22,7 @@ function likePlace(defaultCard, likeCount, me) {
 
 
  // создание шаблона для карточек
- function createDefaultCard(card, me, handleLike, handleDislike, openImageModal, openConfirmDelete) {
+ function createDefaultCard(card, me, handleLike, handleDislike, openConfirmDelete) {
   const defaultCard = cardBlock.cloneNode(true);
   const cardImage = defaultCard.querySelector('.element__image');
   const cardTitle = defaultCard.querySelector('.element__title');
@@ -32,10 +33,10 @@ function likePlace(defaultCard, likeCount, me) {
   cardTitle.textContent = card.name;
   cardImage.addEventListener('click', () => {
     imagePop.src = cardImage.src;
-    imagePop.alt = cardTitle.textContent;
+    imagePop.alt = cardImage.alt;
     captionPop.textContent = cardTitle.textContent;
-    openImageModal(cardImage, cardTitle);
-  });
+        handleBigImage();
+     });
 
   likeCard.addEventListener("click", () => {
     if (!likeCard.classList.contains('element__like_active')) {
