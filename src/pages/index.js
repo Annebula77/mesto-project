@@ -8,12 +8,11 @@ import { cardsList,
   confirmDeleteBtn,
   confirmDelete,
   cardForDelete,
-  deleteCard,
   openConfirmDelete,
+  deleteCard,
   avatarForm,
   profile,
   profileSubmitBtn,
-  avatar,
   avatarInput,
   avatarChangeBtn,
   avatarSubmitBtn,
@@ -39,6 +38,7 @@ import { cardsList,
  } from '../utils/utils.js';
 import Api from '../components/Api.js';
 import UserInfo from '../components/UserInfo.js';
+import Section from '../components/Section.js';
 
 //Класс API
 const api = new Api(cfg);
@@ -65,6 +65,18 @@ Promise.all([api.getUserData(), api.getServerCards()])
     const defaultCard = createDefaultCard(card, handleLike, handleDislike, openConfirmDelete, handleBigImage);
     cardsList.append(defaultCard);
   });
+  //Ниже код для класса Section
+  const section = new Section({
+    items: cards,
+    renderer: (item) => {
+      //Здесь нужно создать переменную, которая будет сохранит создаваемые карточчки
+      //и передаст их в Section. Создавать карточки с помощью функции + класса Card.js
+      //Оставил только console.log, из него видно, что класс Section получает необходимые данные
+      //Которые нужно будет передать в функцию отрисовки класса Card
+    }
+  }, '.elemets');
+  console.log(section);
+  //Конец кода класса Section
 })
 .catch((err) => {
   console.error(err);
