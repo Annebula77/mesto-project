@@ -3,7 +3,7 @@ import './index.css';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithDelete from '../components/PopupWithDelete.js';
-import { createDefaultCard, likePlace } from '../components/card.js';
+import { createDefaultCard, likePlace } from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import { cardsList,
   confirmDelete,
@@ -37,7 +37,7 @@ import { cardsList,
 import Api from '../components/Api.js';
 import UserInfo from '../components/UserInfo.js';
 import Section from '../components/Section.js';
-
+import Card from '../components/Test.js';
 //Класс API
 const api = new Api(cfg);
 //Класс UserInfo
@@ -48,7 +48,7 @@ export const popupWithImage = new PopupWithImage(imageModal, imagePop, captionPo
 const popupWithDelete = new PopupWithDelete(confirmDelete, confirmDel);
 
 export const handleBigImage = () => {
- popupWithImage.openPopup();
+  popupWithImage.openPopup();
 popupWithImage.setEventListeners();
 }
 
@@ -108,15 +108,18 @@ const popupAddUserCard = new PopupWithForm(cardAddPopup, (evt, getInputs) => {
 })
 popupAddUserCard.setEventListeners();
 //Данные из промисов (вторые then)
+
 Promise.all([api.getUserData(), api.getServerCards()])
 .then(([me, cards]) => {
   // данные из профиля
     userInfo.setUserInfo(me);
     // добавление карточек c сервера
-  cards.forEach((card) => {
-    const defaultCard = createDefaultCard(card, handleLike, handleDislike, handleBigImage);
-    cardsList.append(defaultCard);
-  })
+  // cards.forEach((card) => {
+  //   const defaultCard = createDefaultCard(card, handleLike, handleDislike, handleBigImage);
+  //   cardsList.append(defaultCard);
+  // })
+  const testCard = new Card(cards[0], me, cardTemplate, {handleLike, handleDislike});
+
    //Ниже код для класса Section
   const section = new Section({
     items: cards,
@@ -129,10 +132,32 @@ Promise.all([api.getUserData(), api.getServerCards()])
   }, '.elemets');
   console.log(section);
   //Конец кода класса Section
+  section.rendererItems();
 })
 .catch((err) => {
   console.error(err);
 })
+
+function createCardTemplate(cards, me) {
+  const card = new Card(
+    cards[0],
+    me,
+    cardTemplate,
+    {
+      handleLike: (isLiked, cardId) => {
+        (isLiked ? api.deleteLike(cardId) : api.putLike(cardId))
+        .then((data) => {
+          card.toggleLikes(data);
+        })
+      },
+      handleCardClick: (name, link) => {
+        popupWithImage.openPopup(name, link);
+      },
+      deleteCallback: (evt) => { PopupWithDelete.openPopup();  PopupWithDelete.setEventListeners(evt)},
+    }
+  )
+  return card.createCard();
+}
 
 function handleLike(defaultCard, card, profile) {
   api.putLike(card._id)
