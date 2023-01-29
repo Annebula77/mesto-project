@@ -2,7 +2,7 @@ export default class Section {
     constructor({items, renderer}, containerSelector) {
         this._renderer = renderer;
         this._container = containerSelector;
-        this._item = items;
+        this._items = items;
     }
     //Метод добавляет элементы в разметку
     addItem(item) {
