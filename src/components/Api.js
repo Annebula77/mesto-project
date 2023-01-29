@@ -3,54 +3,63 @@ export default class Api {
     this._url = options.url;
     this._headers = options.headers;
   };
+
   _checkResponse(res) {
     if (res.ok) {
       return res.json()
     }
     return Promise.reject(`Ошибка: ${res.status}`)
   };
+
   getUserData() {
       return fetch(`${this._url}users/me`, {headers: this._headers})
       .then(this._checkResponse);
   };
-  editProfileData(name, about) {
+
+  editProfileData(data) {
+    console.log(data);
     return fetch(`${this._url}users/me`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
-        name: name,
-        about: about
+        name: data.name,
+        about: data.about
       })
     })
     .then(this._checkResponse);
   };
-  changeAvatar(avatar) {
+
+  changeAvatar(data) {
     return fetch(`${this._url}/users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
-        avatar: avatar
+        avatar: data.avatar,
       })
     })
     .then(this._checkResponse)
   };
+
   getServerCards() {
     return fetch(`${this._url}/cards`, {
       headers: this._headers
     })
     .then(this._checkResponse)
   };
-  postNewCard(name, link) {
+
+  postNewCard(data) {
+    console.log(data);
     return fetch(`${this._url}/cards`, {
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify({
-        name: name,
-        link: link
+        name: data.name,
+        link: data.link,
       })
     })
     .then(this._checkResponse)
   };
+
   putLike(cardId) {
     return fetch(`${this._url}/cards/likes/${cardId}`, {
       method: 'PUT',
@@ -58,6 +67,7 @@ export default class Api {
     })
     .then(this._checkResponse)
   };
+
   deleteLike(cardId) {
     return fetch(`${this._url}/cards/likes/${cardId}`, {
       method: 'DELETE',
@@ -65,4 +75,5 @@ export default class Api {
     })
     .then(this._checkResponse)
   };
-}
+
+};
