@@ -13,23 +13,24 @@ export default class Api {
       return fetch(`${this._url}users/me`, {headers: this._headers})
       .then(this._checkResponse);
   };
-  editProfileData(name, about) {
+  editProfileData(data) {
+    console.log(data);
     return fetch(`${this._url}users/me`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
-        name: name,
-        about: about
+        name: data.name,
+        about: data.about
       })
     })
     .then(this._checkResponse);
   };
-  changeAvatar(avatar) {
+  changeAvatar(data) {
     return fetch(`${this._url}/users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
-        avatar: avatar,
+        avatar: data.avatar,
       })
     })
     .then(this._checkResponse)

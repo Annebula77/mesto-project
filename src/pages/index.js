@@ -56,11 +56,9 @@ popupWithImage.setEventListeners();
 const popupChangeData = new PopupWithForm(profilePopup, (evt, getInputs) => {
   evt.preventDefault();
   profileSubmitBtn.textContent = 'Сохранение...';
-  const {name, about} = getInputs;
-  console.log(name, about);
   api.editProfileData({
-    name: name,
-    about: about,
+    name: getInputs.name,
+    about: getInputs.about,
   })
   .then((data) => {
     userInfo.setUserInfo(data);
@@ -77,9 +75,8 @@ popupChangeData.setEventListeners();
 const popupChangeAvatar = new PopupWithForm(popupAvatar, (evt, getInputs) => {
   evt.preventDefault();
   avatarSubmitBtn.textContent = 'Сохранение...';
-  const avatar = getInputs['avatar-link'];
   api.changeAvatar({
-    avatar: avatar,
+    avatar: getInputs.avatar,
   })
   .then((data) => {
     userInfo.setUserInfo(data);
