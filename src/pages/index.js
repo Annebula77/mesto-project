@@ -44,8 +44,6 @@ const api = new Api(cfg);
 const userInfo = new UserInfo(profileName, profileJob, avatar);
 export const popupWithImage = new PopupWithImage(imageModal, imagePop, captionPop);
 
-const popupChangeData = new PopupWithForm(profilePopup, changeProfileData);
-const popupChangeAvatar = new PopupWithForm(popupAvatar, addNewAvatar);
 const popupAddUserCard = new PopupWithForm(cardAddPopup, addNewCard);
 const popupWithDelete = new PopupWithDelete(confirmDelete, confirmDel);
 
@@ -53,6 +51,46 @@ export const handleBigImage = () => {
  popupWithImage.openPopup();
 popupWithImage.setEventListeners();
 }
+
+//Класс открытия попапа профиля
+const popupChangeData = new PopupWithForm(profilePopup, (evt, getInputs) => {
+  evt.preventDefault();
+  profileSubmitBtn.textContent = 'Сохранение...';
+  const {name, about} = getInputs;
+  console.log(name, about);
+  api.editProfileData({
+    name: name,
+    about: about,
+  })
+  .then((data) => {
+    userInfo.setUserInfo(data);
+    popupChangeData.closePopup();
+  })
+  .catch(err => console.log(err))
+  .finally(() => {
+    profileSubmitBtn.textContent = "Сохранить";
+  })
+});
+popupChangeData.setEventListeners();
+
+//Класс открытия попапа аватара
+const popupChangeAvatar = new PopupWithForm(popupAvatar, (evt, getInputs) => {
+  evt.preventDefault();
+  avatarSubmitBtn.textContent = 'Сохранение...';
+  const avatar = getInputs['avatar-link'];
+  api.changeAvatar({
+    avatar: avatar,
+  })
+  .then((data) => {
+    userInfo.setUserInfo(data);
+    popupChangeAvatar.closePopup();
+  })
+  .catch(err => console.log(err))
+  .finally(() => {
+    avatarSubmitBtn.textContent = 'Сохранить';
+  })
+})
+popupChangeAvatar.setEventListeners();
 
 //Данные из промисов (вторые then)
 Promise.all([api.getUserData(), api.getServerCards()])
@@ -81,42 +119,6 @@ Promise.all([api.getUserData(), api.getServerCards()])
   console.error(err);
 })
 
-//обработчик формы изменения профиля
-function changeProfileData (evt) {
-  evt.preventDefault();
-  profileSubmitBtn.textContent = 'Сохранение...';
-  profileName.textContent = nameInput.value;
-  profileJob.textContent = jobInput.value;
-  api.editProfileData(nameInput.value, jobInput.value)
-  .then((data) => {
-    userInfo.setUserInfo(data);
-    popupChangeData.closePopup();
-  })
-  .catch((err) => {
-    console.error(err);
-  })
-  .finally(() => {
-    profileSubmitBtn.textContent = "Сохранить";
-  });
-}
-
-// функция обработки формы изменения аватара
-function addNewAvatar (evt) {
-  evt.preventDefault();
-  avatarSubmitBtn.textContent = 'Сохранение...';
-  const avatarValue = avatarInput.value;
-  api.changeAvatar(avatarValue).then((data) => {
-    userInfo.setUserInfo(data);
-    popupChangeAvatar.closePopup(popupAvatar);
-    })
-  .catch((err) => {
-    console.error(err);
-  })
-  .finally(() => {
-    avatarSubmitBtn.textContent = "Сохранить";
-  });
-}
-
 function handleLike(defaultCard, card, profile) {
   api.putLike(card._id)
   .then((data) => {
@@ -126,8 +128,6 @@ function handleLike(defaultCard, card, profile) {
     console.error(err);
   });
 }
-
-
 
 function confirmDel(card) {
   api.deleteMyCard(card.dataset.id)
@@ -139,8 +139,6 @@ function confirmDel(card) {
       console.error(err);
   });
 };
-
-
 
 export function handleDislike(defaultCard, card, profile) {
   api.deleteLike(card._id)
@@ -170,7 +168,6 @@ export function addNewCard (evt) {
   });
 };
 
-
 avatarChangeBtn.addEventListener('click', function() {
   popupChangeAvatar.openPopup();
 });
@@ -186,19 +183,7 @@ popupButtonOpen.addEventListener('click', function () {
   jobInput.value = profileJob.textContent;
 });
 
-// обработчик кнопки в форме изменения профиля
-//formElement.addEventListener('submit', changeProfileData);
-
-//обработчик кнопки сохранить для пользовательских карточек
-//cardAddFormElement.addEventListener('submit', addNewCard);
-
-//обработчик кнопки сохранить для аватара
-//avatarForm.addEventListener('submit', addNewAvatar);
-
-
-
 [...document.forms].forEach((formElement) => {
   const formValidator = new FormValidator(settings, formElement)
   formValidator.enableValidation();
 })
-
