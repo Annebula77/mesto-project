@@ -20,10 +20,12 @@ export default class PopupWithForm extends Popup {
     });
     return this._inputValues;
   }
+
   setEventListeners() {
     super.setEventListeners();
     this._popupSelector.addEventListener('submit', (evt) => {
       this._callback(evt, this._getInputValues());
     });
   };
+
 }

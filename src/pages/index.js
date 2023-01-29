@@ -44,7 +44,7 @@ const api = new Api(cfg);
 const userInfo = new UserInfo(profileName, profileJob, avatar);
 export const popupWithImage = new PopupWithImage(imageModal, imagePop, captionPop);
 
-const popupAddUserCard = new PopupWithForm(cardAddPopup, addNewCard);
+// const popupAddUserCard = new PopupWithForm(cardAddPopup, addNewCard);
 const popupWithDelete = new PopupWithDelete(confirmDelete, confirmDel);
 
 export const handleBigImage = () => {
@@ -52,7 +52,7 @@ export const handleBigImage = () => {
 popupWithImage.setEventListeners();
 }
 
-//Класс открытия попапа профиля
+//Класс работы модальных окон для профиля
 const popupChangeData = new PopupWithForm(profilePopup, (evt, getInputs) => {
   evt.preventDefault();
   profileSubmitBtn.textContent = 'Сохранение...';
@@ -71,7 +71,7 @@ const popupChangeData = new PopupWithForm(profilePopup, (evt, getInputs) => {
 });
 popupChangeData.setEventListeners();
 
-//Класс открытия попапа аватара
+//Класс работы модальных окон для аватара
 const popupChangeAvatar = new PopupWithForm(popupAvatar, (evt, getInputs) => {
   evt.preventDefault();
   avatarSubmitBtn.textContent = 'Сохранение...';
@@ -89,6 +89,24 @@ const popupChangeAvatar = new PopupWithForm(popupAvatar, (evt, getInputs) => {
 })
 popupChangeAvatar.setEventListeners();
 
+//Класс работы модальных окон для добавления места
+const popupAddUserCard = new PopupWithForm(cardAddPopup, (evt, getInputs) => {
+  evt.preventDefault();
+  cardSubmitButton.textContent = "Создание...";
+  api.postNewCard(getInputs)
+  .then((card) => {
+    cardAddFormElement.reset();
+    cardsList.prepend(createDefaultCard(card, profile));
+    popupAddUserCard.closePopup();
+  })
+  .catch((err) => {
+    console.error(err);
+  })
+  .finally(() => {
+    cardSubmitButton.textContent = "Создать";
+  });
+})
+popupAddUserCard.setEventListeners();
 //Данные из промисов (вторые then)
 Promise.all([api.getUserData(), api.getServerCards()])
 .then(([me, cards]) => {
