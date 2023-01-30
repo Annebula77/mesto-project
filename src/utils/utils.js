@@ -2,12 +2,9 @@
 // переменные попапа профиля
 const profilePopup = document.querySelector('#profilePopup');
 const formElement = document.querySelector('#profileForm');
-const profile = document.querySelector('.profile');
 const avatar = document.querySelector('.profile__avatar');
 const avatarChangeBtn = document.querySelector('.profile__avatar-wrapper ');
-const avatarForm = document.querySelector('#avatarForm');
 const avatarSubmitBtn = document.querySelector('#avatarButton');
-const avatarInput = document.querySelector('#form__avatar');
 const popupAvatar = document.querySelector('#changeAvatar');
 const popupButtonOpen = document.querySelector('.profile__data-change');
 const profileName = document.querySelector('#profileTitle');
@@ -20,8 +17,6 @@ const profileSubmitBtn = document.querySelector('#submitButton');
 const buttonOpenPopupCard = document.querySelector('.profile__add');
 const cardAddPopup = document.querySelector('#cardAddPopup');
 const cardAddFormElement = document.querySelector('#addForm');
-const placeInput = document.querySelector('#form__place');
-const linkInput = document.querySelector('#form__link');
 const cardSubmitButton = document.querySelector('#submitButtonAdd');
 
 //переменные попапа полноразмерных изображений
@@ -34,9 +29,6 @@ const captionPop = document.querySelector('.pop-up__caption');
 const cardsList = document.querySelector('.elements');
 const cardTemplate = document.querySelector('#cardTemplate').content;
 const cardBlock = cardTemplate.querySelector('.element').cloneNode(true);
-
-// Подтверждение удаления карточки
-
 const confirmDelete = document.querySelector('#confirmChoice');
 
 
@@ -63,13 +55,9 @@ export const cfg= {
 
 export {
   profilePopup,
-  profile,
-  avatar,
   confirmDelete,
-  avatarForm,
   profileSubmitBtn,
   avatarChangeBtn,
-  avatarInput,
   avatarSubmitBtn,
   popupAvatar,
   formElement,
@@ -81,8 +69,6 @@ export {
   buttonOpenPopupCard,
   cardAddPopup,
   cardAddFormElement,
-  placeInput,
-  linkInput,
   imageModal,
   imagePop,
   captionPop,
@@ -91,4 +77,5 @@ export {
   cardBlock,
   settings,
   cardSubmitButton,
+  avatar
   }

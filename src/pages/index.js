@@ -1,21 +1,16 @@
 import './index.css';
-//import Popup from '../components/Popup.js';
+import Popup from '../components/Popup.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithDelete from '../components/PopupWithDelete.js';
-import { createDefaultCard, likePlace } from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import { cardsList,
   confirmDelete,
-  avatarForm,
-  profile,
   profileSubmitBtn,
-  avatarInput,
   avatarChangeBtn,
   avatarSubmitBtn,
   popupAvatar,
   profilePopup,
-  formElement,
   popupButtonOpen,
   profileName,
   profileJob,
@@ -24,8 +19,6 @@ import { cardsList,
   buttonOpenPopupCard,
   cardAddPopup,
   cardAddFormElement,
-  placeInput,
-  linkInput,
   imageModal,
   imagePop,
   captionPop,
@@ -34,24 +27,16 @@ import { cardsList,
   avatar,
   cfg,
   cardTemplate,
- } from '../utils/utils.js';
+  } from '../utils/utils.js';
 import Api from '../components/Api.js';
 import UserInfo from '../components/UserInfo.js';
 import Section from '../components/Section.js';
-import Card from '../components/Test.js';
+import Card from '../components/Сard.js';
 //Класс API
 const api = new Api(cfg);
 //Класс UserInfo
 const userInfo = new UserInfo(profileName, profileJob, avatar);
 export const popupWithImage = new PopupWithImage(imageModal, imagePop, captionPop);
-
-// const popupAddUserCard = new PopupWithForm(cardAddPopup, addNewCard);
-const popupWithDelete = new PopupWithDelete(confirmDelete, confirmDel);
-
-export const handleBigImage = () => {
-  popupWithImage.openPopup();
-popupWithImage.setEventListeners();
-}
 
 //Класс работы модальных окон для профиля
 const popupChangeData = new PopupWithForm(profilePopup, (evt, getInputs) => {
@@ -90,6 +75,28 @@ const popupChangeAvatar = new PopupWithForm(popupAvatar, (evt, getInputs) => {
 })
 popupChangeAvatar.setEventListeners();
 
+function createCardTemplate(cards) {
+  const card = new Card(
+    cards,
+    userInfo.userId,  //Передаю айдишник юзера (наш)
+    cardTemplate,
+    {
+      handleLike: (cardId ,isLiked) => {
+        (isLiked ? api.deleteLike(cardId) : api.putLike(cardId))
+        .then((data) => {
+          card.toggleLikes(data);
+        })
+      },
+      handleImagePopup: (name, link) => {
+        popupWithImage.openPopup(name, link);
+        popupWithImage.setEventListeners();
+      },
+      deleteCallback: (evt) => { popupWithDelete.openPopup(evt) }
+    }
+  )
+  return card.createCard();
+}
+
 //Класс работы модальных окон для добавления места
 const popupAddUserCard = new PopupWithForm(cardAddPopup, (evt, getInputs) => {
   evt.preventDefault();
@@ -97,7 +104,7 @@ const popupAddUserCard = new PopupWithForm(cardAddPopup, (evt, getInputs) => {
   api.postNewCard(getInputs)
   .then((card) => {
     cardAddFormElement.reset();
-    cardsList.prepend(createDefaultCard(card, profile));
+    cardsList.prepend(createCardTemplate(card, userInfo.userId));
     popupAddUserCard.closePopup();
   })
   .catch((err) => {
@@ -109,6 +116,19 @@ const popupAddUserCard = new PopupWithForm(cardAddPopup, (evt, getInputs) => {
 })
 popupAddUserCard.setEventListeners();
 //Данные из промисов (вторые then)
+
+const popupWithDelete = new PopupWithDelete(confirmDelete, {deleteCallback:
+(card) => {
+  api.removeCard(card.dataset.id)
+  .then(() => {
+    card.remove()
+    popupWithDelete.closePopup();
+    popupWithDelete.removeEventListeners();
+  })
+  .catch((err) => {
+    console.error(err);
+}) }
+});
 
 Promise.all([api.getUserData(), api.getServerCards()])
 .then((data) => {
@@ -134,78 +154,6 @@ Promise.all([api.getUserData(), api.getServerCards()])
 .catch((err) => {
   console.error(err);
 })
-
-function createCardTemplate(cards) {
-  const card = new Card(
-    cards,
-    userInfo.userId,  //Передаю айдишник юзера (наш)
-    cardTemplate,
-    {
-      handleLike: (cardId ,isLiked) => {
-        (isLiked ? api.deleteLike(cardId) : api.putLike(cardId))
-        .then((data) => {
-          card.toggleLikes(data);
-          
-        })
-      },
-      handleImagePopup: (name, link) => {
-        popupWithImage.openPopup(name, link);
-        popupWithImage.setEventListeners();
-      },
-      deleteCallback: () => { popupWithDelete.openPopup();  popupWithDelete.setEventListeners() },
-    }
-  )
-  return card.createCard();
-}
-
-function handleLike(defaultCard, card, profile) {
-  api.putLike(card._id)
-  .then((data) => {
-    likePlace(defaultCard, data.likes, profile);
-  })
-  .catch((err) => {
-    console.error(err);
-  });
-}
-
-function confirmDel(card) {
-  api.deleteMyCard(card.dataset.id)
-    .then(() => {
-      card.remove();
-      popupWithDelete.closePopup();
-    })
-    .catch((err) => {
-      console.error(err);
-  });
-};
-
-export function handleDislike(defaultCard, card, profile) {
-  api.deleteLike(card._id)
-  .then((data) => {
-    likePlace(defaultCard, data.likes, profile);
-  })
-  .catch((err) => {
-    console.error(err);
-  });
-};
-
-//добавление новой карточки из формы
-export function addNewCard (evt) {
-  evt.preventDefault();
-  cardSubmitButton.textContent = "Создание...";
-  api.postNewCard(placeInput.value, linkInput.value)
-  .then((card) => {
-    cardAddFormElement.reset();
-    cardsList.prepend(createDefaultCard(card, profile));
-    popupAddUserCard.closePopup();
-  })
-  .catch((err) => {
-    console.error(err);
-  })
-  .finally(() => {
-    cardSubmitButton.textContent = "Создать";
-  });
-};
 
 avatarChangeBtn.addEventListener('click', function() {
   popupChangeAvatar.openPopup();
