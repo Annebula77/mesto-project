@@ -111,39 +111,34 @@ popupAddUserCard.setEventListeners();
 //Данные из промисов (вторые then)
 
 Promise.all([api.getUserData(), api.getServerCards()])
-.then(([me, cards]) => {
+.then((data) => {
   // данные из профиля
-    userInfo.setUserInfo(me);
+    userInfo.setUserInfo(data[0]);
     // добавление карточек c сервера
-  // cards.forEach((card) => {
-  //   const defaultCard = createDefaultCard(card, handleLike, handleDislike, handleBigImage);
-  //   cardsList.append(defaultCard);
-  // })
-  const testCard = new Card(cards[0], me, cardTemplate, {handleLike, handleDislike});
-
    //Ниже код для класса Section
   const section = new Section({
-    items: cards,
+    items: data[1],
     renderer: (item) => {
       //Здесь нужно создать переменную, которая будет сохранит создаваемые карточчки
       //и передаст их в Section. Создавать карточки с помощью функции + класса Card.js
       //Оставил только console.log, из него видно, что класс Section получает необходимые данные
       //Которые нужно будет передать в функцию отрисовки класса Card
+      const cardElement = createCardTemplate(item);
+      section.addItem(cardElement);
     }
-  }, '.elemets');
-  console.log(section);
+  }, '.elements');
   //Конец кода класса Section
-  section.rendererItems();
+  section.renderItems();
 })
 .catch((err) => {
   console.error(err);
 })
 
-function createCardTemplate(cards, me) {
+function createCardTemplate(cards) {
   const card = new Card(
-    cards[0],
-    me,
-    defaultCard,
+    cards,
+    userInfo.userId,  //Передаю айдишник юзера (наш)
+    cardTemplate,
     {
       handleLike: (isLiked, cardId) => {
         (isLiked ? api.deleteLike(cardId) : api.putLike(cardId))
