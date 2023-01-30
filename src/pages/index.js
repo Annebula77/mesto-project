@@ -33,6 +33,7 @@ import { cardsList,
   cardSubmitButton,
   avatar,
   cfg,
+  cardTemplate,
  } from '../utils/utils.js';
 import Api from '../components/Api.js';
 import UserInfo from '../components/UserInfo.js';
@@ -142,7 +143,7 @@ function createCardTemplate(cards, me) {
   const card = new Card(
     cards[0],
     me,
-    cardTemplate,
+    defaultCard,
     {
       handleLike: (isLiked, cardId) => {
         (isLiked ? api.deleteLike(cardId) : api.putLike(cardId))
@@ -153,7 +154,7 @@ function createCardTemplate(cards, me) {
       handleCardClick: (name, link) => {
         popupWithImage.openPopup(name, link);
       },
-      deleteCallback: (evt) => { PopupWithDelete.openPopup();  PopupWithDelete.setEventListeners(evt)},
+      deleteCallback: (evt) => { PopupWithDelete.openPopup();  PopupWithDelete.setEventListeners(evt) },
     }
   )
   return card.createCard();

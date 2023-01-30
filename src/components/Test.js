@@ -22,10 +22,10 @@ export default class Card {
         this._likes = data.likes;
         this._ownerId = data.owner._id;
         this._myId = me._id;
-        this._selector = selector;
         this._handleLike = handleLike;
         this._deleteCallback = deleteCallback;
         this._handleImagePopup = handleImagePopup;
+        this._selector =  document.querySelector('#cardTemplate').content;
         this._defaultCard = this._selector.querySelector('.element').cloneNode(true);
         this._defaultCardTitle = this._defaultCard.querySelector('.element__title');
         this._defaultCardImage = this._defaultCard.querySelector('.element__image');
@@ -58,6 +58,7 @@ _managelikes() {
     });
   } else {
     this._defaultCardLike.classList.remove('element__like_active');
+    this._defaultCardLikeNumber.style.display = 'none';
   }
   this._defaultCardLikeNumber.textContent = this._likes.length;
 }
@@ -87,11 +88,3 @@ _deleteCard(){
 
 }
 
- cardImage.addEventListener('click', () => {
-    imagePop.src = cardImage.src;
-    imagePop.alt = cardImage.alt;
-    captionPop.textContent = cardTitle.textContent;
-        handleBigImage();
-     });
-
-     wasteBin.addEventListener('click', openConfirmDelete);
