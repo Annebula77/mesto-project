@@ -1,4 +1,5 @@
 .element__likes-number {
+  visibility: visible;
   box-sizing: border-box;
   font-size: 13px;
   font-weight: 400;

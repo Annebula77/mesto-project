@@ -125,6 +125,7 @@ Promise.all([api.getUserData(), api.getServerCards()])
       //Которые нужно будет передать в функцию отрисовки класса Card
       const cardElement = createCardTemplate(item);
       section.addItem(cardElement);
+
     }
   }, '.elements');
   //Конец кода класса Section
@@ -140,16 +141,18 @@ function createCardTemplate(cards) {
     userInfo.userId,  //Передаю айдишник юзера (наш)
     cardTemplate,
     {
-      handleLike: (isLiked, cardId) => {
+      handleLike: (cardId ,isLiked) => {
         (isLiked ? api.deleteLike(cardId) : api.putLike(cardId))
         .then((data) => {
           card.toggleLikes(data);
+          
         })
       },
-      handleCardClick: (name, link) => {
+      handleImagePopup: (name, link) => {
         popupWithImage.openPopup(name, link);
+        popupWithImage.setEventListeners();
       },
-      deleteCallback: (evt) => { PopupWithDelete.openPopup();  PopupWithDelete.setEventListeners(evt) },
+      deleteCallback: () => { popupWithDelete.openPopup();  popupWithDelete.setEventListeners() },
     }
   )
   return card.createCard();

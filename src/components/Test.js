@@ -38,16 +38,17 @@ export default class Card {
     this._defaultCardImage.src = this._link;
     this._defaultCardImage.alt = this._name;
     this._defaultCardTitle.textContent = this._name;
-    this._defaultCardLikeNumber.textContent = this._likes.length;
     if(this._userId === this._ownerId) {
       this._defaultCardDel.classList.add('element__remove_active');
     }
-    if(this._likes.length) {
-      this._defaultCardLikeNumber.textContent = this._likes.length;
-    } else {
+    if(this._likes.length === 0) {
       this._defaultCardLikeNumber.textContent = '0';
-    }
-    this._setEventListeners();
+      this._defaultCardLikeNumber.style.visibility = 'hidden';
+         } else {
+      this._defaultCardLikeNumber.textContent = this._likes.length;
+      this._defaultCardLikeNumber.style.visibility = 'visible';
+     }
+    this.setEventListeners();
     this._addLikeIcon();
     this._deleteCard();
     return this._defaultCard;
@@ -60,52 +61,41 @@ export default class Card {
   }
 
   _addLikeIcon() {
-    if(this._checkLikes()) {
+     if(this._checkLikes()) {
       this._defaultCardLike.classList.add('element__like_active');
-    } else {
-      this._defaultCardLike.classList.remove('element__like_active');
+      } else {
+       this._defaultCardLike.classList.remove('element__like_active');
     }
+
   }
 
+
   _isLiked() {
-    return this._defaultCardLike.classList.contains('element__like_active');
+      return this._defaultCardLike.classList.contains('element__like_active');
+
   }
+
 
   toggleLikes(data) {
     this._defaultCardLikeNumber.textContent = data.likes.length;
     this._defaultCardLike.classList.toggle('element__like_active');
-  }
+      }
 
-  _deleteCard(){
+  _deleteCard() {
     if(this._myId === this._ownerId) {
       this._defaultCardDel.classList.add('element__remove_active');
     }
   }
-  _setEventListeners(){
+  setEventListeners(){
     this._defaultCardImage.addEventListener('click', () => {
         this._handleImagePopup(this._name, this._link);
     });
     this._defaultCardLike.addEventListener('click', () => {
-        this._handleLike(this._isLiked(), this._id);
-    });
-    this._defaultCardDel.addEventListener('click', (evt) => {this._deleteCallback(evt)});
+      this._handleLike(this._id, this._isLiked())
+      this._defaultCardLikeNumber.style.visibility = 'visible';
+      })
+
+    this._defaultCardDel.addEventListener('click', () => {this._deleteCallback()});
   };
 }
-
-
-// _managelikes() {
-//   if (this._likes.length !== 0) {
-//     this._like.forEach((user) => {
-//       if (user._id.includes(this._myId)) {
-//         this._defaultCardLike.classList.add('element__like_active');
-//       } else {
-//         this._defaultCardLike.classList.remove('element__like_active');
-//       }
-//     });
-//   } else {
-//     this._defaultCardLike.classList.remove('element__like_active');
-//     this._defaultCardLikeNumber.style.display = 'none';
-//   }
-//   this._defaultCardLikeNumber.textContent = this._likes.length;
-// }
 
