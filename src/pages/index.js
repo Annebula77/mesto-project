@@ -101,6 +101,9 @@ function createCardTemplate(cards) {
         .then((data) => {
           card.toggleLikes(data);
         })
+        .catch((err) => {
+          console.log(`Ошибка ${err}`);
+        })
       },
       handleImagePopup: (name, link) => {
         popupWithImage.openPopup(name, link);
