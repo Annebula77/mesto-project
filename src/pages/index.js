@@ -37,6 +37,7 @@ let cardElement;
 const api = new Api(cfg);
 const userInfo = new UserInfo(profileName, profileJob, avatar);
 export const popupWithImage = new PopupWithImage(imageModal, imagePop, captionPop);
+popupWithImage.setEventListeners();
 
 Promise.all([api.getUserData(), api.getServerCards()])
 .then((data) => {
