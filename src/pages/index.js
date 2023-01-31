@@ -122,7 +122,6 @@ const popupAddUserCard = new PopupWithForm(cardAddPopup, (evt, getInputs) => {
     cardElement = createCardTemplate(card);
     section.addItem(cardElement);
     popupAddUserCard.closePopup();
-    window.location.reload();
   })
   .catch((err) => {
     console.error(err);
@@ -142,7 +141,6 @@ const popupWithDelete = new PopupWithDelete(
         card.remove();
         popupWithDelete.closePopup();
         popupWithDelete.removeEventListeners();
-        window.location.reload();
       })
       .catch((err) => {
         console.error(err);
