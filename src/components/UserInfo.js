@@ -23,7 +23,8 @@ export default class UserInfo {
             this._avatar.src = data.avatar;
         }
         if(data._id){
-        this._userId = data._id;
+            this.userId = data._id;
         }
     };
+
 };
