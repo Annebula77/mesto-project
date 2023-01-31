@@ -26,4 +26,5 @@ export default class UserInfo {
             this.userId = data._id;
         }
     };
+
 };
