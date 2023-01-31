@@ -31,10 +31,29 @@ import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithDelete from '../components/PopupWithDelete.js';
 import UserInfo from '../components/UserInfo.js';
 import Section from '../components/Section.js';
+let section;
+let cardElement;
 
 const api = new Api(cfg);
 const userInfo = new UserInfo(profileName, profileJob, avatar);
 export const popupWithImage = new PopupWithImage(imageModal, imagePop, captionPop);
+popupWithImage.setEventListeners();
+
+Promise.all([api.getUserData(), api.getServerCards()])
+.then((data) => {
+  userInfo.setUserInfo(data[0]);
+  section = new Section({
+    items: data[1],
+    renderer: (item) => {
+      cardElement = createCardTemplate(item);
+      section.addItem(cardElement);
+    }
+  }, '.elements');
+  section.renderItems();
+})
+.catch((err) => {
+  console.error(err);
+});
 
 const popupChangeData = new PopupWithForm(profilePopup, (evt, getInputs) => {
   evt.preventDefault();
@@ -82,6 +101,9 @@ function createCardTemplate(cards) {
         .then((data) => {
           card.toggleLikes(data);
         })
+        .catch((err) => {
+          console.log(`Ошибка ${err}`);
+        })
       },
       handleImagePopup: (name, link) => {
         popupWithImage.openPopup(name, link);
@@ -101,9 +123,9 @@ const popupAddUserCard = new PopupWithForm(cardAddPopup, (evt, getInputs) => {
   api.postNewCard(getInputs)
   .then((card) => {
     cardAddFormElement.reset();
-    cardsList.prepend(createCardTemplate(card, userInfo.userId));
+    cardElement = createCardTemplate(card);
+    section.addItem(cardElement);
     popupAddUserCard.closePopup();
-    window.location.reload();
   })
   .catch((err) => {
     console.error(err);
@@ -123,7 +145,6 @@ const popupWithDelete = new PopupWithDelete(
         card.remove();
         popupWithDelete.closePopup();
         popupWithDelete.removeEventListeners();
-        window.location.reload();
       })
       .catch((err) => {
         console.error(err);
@@ -131,22 +152,6 @@ const popupWithDelete = new PopupWithDelete(
     }
   }
 );
-
-Promise.all([api.getUserData(), api.getServerCards()])
-.then((data) => {
-  userInfo.setUserInfo(data[0]);
-  const section = new Section({
-    items: data[1],
-    renderer: (item) => {
-      const cardElement = createCardTemplate(item);
-      section.addItem(cardElement);
-    }
-  }, '.elements');
-  section.renderItems();
-})
-.catch((err) => {
-  console.error(err);
-});
 
 avatarChangeBtn.addEventListener('click', function() {
   popupChangeAvatar.openPopup();
