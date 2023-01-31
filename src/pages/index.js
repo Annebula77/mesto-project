@@ -87,7 +87,7 @@ function createCardTemplate(cards) {
         popupWithImage.openPopup(name, link);
         popupWithImage.setEventListeners();
       },
-      deleteCallback: (evt) => { 
+      deleteCallback: (evt) => {
         popupWithDelete.openPopup(evt);
       }
     }
@@ -103,6 +103,7 @@ const popupAddUserCard = new PopupWithForm(cardAddPopup, (evt, getInputs) => {
     cardAddFormElement.reset();
     cardsList.prepend(createCardTemplate(card, userInfo.userId));
     popupAddUserCard.closePopup();
+    window.location.reload();
   })
   .catch((err) => {
     console.error(err);
@@ -122,6 +123,7 @@ const popupWithDelete = new PopupWithDelete(
         card.remove();
         popupWithDelete.closePopup();
         popupWithDelete.removeEventListeners();
+        window.location.reload();
       })
       .catch((err) => {
         console.error(err);
