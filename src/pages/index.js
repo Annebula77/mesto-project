@@ -1,22 +1,15 @@
 import './index.css';
 import { cardsList,
-  confirmDelete,
   profileSubmitBtn,
   avatarChangeBtn,
   avatarSubmitBtn,
-  popupAvatar,
-  profilePopup,
   popupButtonOpen,
   profileName,
   profileJob,
   nameInput,
   jobInput,
   buttonOpenPopupCard,
-  cardAddPopup,
   cardAddFormElement,
-  imageModal,
-  imagePop,
-  captionPop,
   settings,
   cardSubmitButton,
   avatar,
@@ -36,7 +29,7 @@ let cardElement;
 
 const api = new Api(cfg);
 const userInfo = new UserInfo(profileName, profileJob, avatar);
-export const popupWithImage = new PopupWithImage(imageModal, imagePop, captionPop);
+export const popupWithImage = new PopupWithImage('#imagePopup');
 popupWithImage.setEventListeners();
 
 Promise.all([api.getUserData(), api.getServerCards()])
@@ -55,7 +48,7 @@ Promise.all([api.getUserData(), api.getServerCards()])
   console.error(err);
 });
 
-const popupChangeData = new PopupWithForm(profilePopup, (evt, getInputs) => {
+const popupChangeData = new PopupWithForm('#profilePopup', (evt, getInputs) => {
   evt.preventDefault();
   profileSubmitBtn.textContent = 'Сохранение...';
   api.editProfileData({
@@ -73,7 +66,7 @@ const popupChangeData = new PopupWithForm(profilePopup, (evt, getInputs) => {
 });
 popupChangeData.setEventListeners();
 
-const popupChangeAvatar = new PopupWithForm(popupAvatar, (evt, getInputs) => {
+const popupChangeAvatar = new PopupWithForm('#changeAvatar', (evt, getInputs) => {
   evt.preventDefault();
   avatarSubmitBtn.textContent = 'Сохранение...';
   api.changeAvatar({
@@ -96,7 +89,7 @@ function createCardTemplate(cards) {
     userInfo.userId,
     cardTemplate,
     {
-      handleLike: (cardId ,isLiked) => {
+      handleLike: (cardId, isLiked) => {
         (isLiked ? api.deleteLike(cardId) : api.putLike(cardId))
         .then((data) => {
           card.toggleLikes(data);
@@ -117,7 +110,7 @@ function createCardTemplate(cards) {
   return card.createCard();
 };
 
-const popupAddUserCard = new PopupWithForm(cardAddPopup, (evt, getInputs) => {
+const popupAddUserCard = new PopupWithForm('#cardAddPopup', (evt, getInputs) => {
   evt.preventDefault();
   cardSubmitButton.textContent = "Создание...";
   api.postNewCard(getInputs)
@@ -136,16 +129,14 @@ const popupAddUserCard = new PopupWithForm(cardAddPopup, (evt, getInputs) => {
 });
 popupAddUserCard.setEventListeners();
 
-const popupWithDelete = new PopupWithDelete(
-  confirmDelete,
+const popupWithDelete = new PopupWithDelete('#confirmChoice',
   {
     deleteCallback: (card) => {
       api.removeCard(card.dataset.id)
       .then(() => {
         card.remove();
         popupWithDelete.closePopup();
-        popupWithDelete.removeEventListeners();
-      })
+       })
       .catch((err) => {
         console.error(err);
       })
