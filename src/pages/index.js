@@ -107,7 +107,7 @@ function createCardTemplate(cards) {
       },
       handleImagePopup: (name, link) => {
         popupWithImage.openPopup(name, link);
-       },
+      },
       deleteCallback: (evt) => {
         popupWithDelete.openPopup(evt);
       }
