@@ -5,7 +5,6 @@ const formElement = document.querySelector('#profileForm');
 const avatar = document.querySelector('.profile__avatar');
 const avatarChangeBtn = document.querySelector('.profile__avatar-wrapper ');
 const avatarSubmitBtn = document.querySelector('#avatarButton');
-//const popupAvatar = document.querySelector('#changeAvatar');
 const popupButtonOpen = document.querySelector('.profile__data-change');
 const profileName = document.querySelector('#profileTitle');
 const profileJob = document.querySelector('#profileSubtitle');
@@ -15,21 +14,13 @@ const profileSubmitBtn = document.querySelector('#submitButton');
 
 // переменные попапа добавления новых карточек
 const buttonOpenPopupCard = document.querySelector('.profile__add');
-//const cardAddPopup = document.querySelector('#cardAddPopup');
 const cardAddFormElement = document.querySelector('#addForm');
 const cardSubmitButton = document.querySelector('#submitButtonAdd');
 
-//переменные попапа полноразмерных изображений
-// const imageModal = document.querySelector('#imagePopup');
-// const imagePop = document.querySelector('.pop-up__image');
-// const captionPop = document.querySelector('.pop-up__caption');
-
 //переменные карточек
 
-const cardsList = document.querySelector('.elements');
 const cardTemplate = document.querySelector('#cardTemplate').content;
 const cardBlock = cardTemplate.querySelector('.element').cloneNode(true);
-//const confirmDelete = document.querySelector('#confirmChoice');
 
 
 //объект валидации
@@ -54,8 +45,6 @@ export const cfg= {
 };
 
 export {
-
-
   profileSubmitBtn,
   avatarChangeBtn,
   avatarSubmitBtn,
@@ -67,7 +56,6 @@ export {
   jobInput,
   buttonOpenPopupCard,
   cardAddFormElement,
-  cardsList,
   cardTemplate,
   cardBlock,
   settings,

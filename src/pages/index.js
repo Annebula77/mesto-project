@@ -1,5 +1,5 @@
 import './index.css';
-import { cardsList,
+import {
   profileSubmitBtn,
   avatarChangeBtn,
   avatarSubmitBtn,
@@ -31,6 +31,13 @@ const api = new Api(cfg);
 const userInfo = new UserInfo(profileName, profileJob, avatar);
 export const popupWithImage = new PopupWithImage('#imagePopup');
 popupWithImage.setEventListeners();
+const profileValidator = new FormValidator(settings, document.querySelector('#profileForm'));
+profileValidator.enableValidation();
+const cardValidator = new FormValidator(settings, document.querySelector('#cardAddPopup'));
+cardValidator.enableValidation();
+const avatarValidator = new FormValidator(settings, document.querySelector('#avatarForm'));
+avatarValidator.enableValidation()
+
 
 Promise.all([api.getUserData(), api.getServerCards()])
 .then((data) => {
@@ -100,8 +107,7 @@ function createCardTemplate(cards) {
       },
       handleImagePopup: (name, link) => {
         popupWithImage.openPopup(name, link);
-        popupWithImage.setEventListeners();
-      },
+       },
       deleteCallback: (evt) => {
         popupWithDelete.openPopup(evt);
       }
@@ -145,10 +151,12 @@ const popupWithDelete = new PopupWithDelete('#confirmChoice',
 );
 
 avatarChangeBtn.addEventListener('click', function() {
+  avatarValidator.resetValidation();
   popupChangeAvatar.openPopup();
 });
 
 buttonOpenPopupCard.addEventListener('click', function () {
+  cardValidator.resetValidation();
   popupAddUserCard.openPopup();
 });
 
@@ -158,7 +166,5 @@ popupButtonOpen.addEventListener('click', function () {
   jobInput.value = profileJob.textContent;
 });
 
-[...document.forms].forEach((formElement) => {
-  const formValidator = new FormValidator(settings, formElement)
-  formValidator.enableValidation();
-});
+
+
