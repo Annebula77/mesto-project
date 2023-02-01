@@ -149,6 +149,7 @@ const popupWithDelete = new PopupWithDelete('#confirmChoice',
     }
   }
 );
+popupWithDelete.setEventListeners();
 
 avatarChangeBtn.addEventListener('click', function() {
   avatarValidator.resetValidation();
@@ -162,9 +163,10 @@ buttonOpenPopupCard.addEventListener('click', function () {
 
 popupButtonOpen.addEventListener('click', function () {
   popupChangeData.openPopup();
-  nameInput.value = profileName.textContent;
-  jobInput.value = profileJob.textContent;
-});
+  const info = userInfo.getUserInfo();
+  nameInput.value = info.name;
+  jobInput.value = info.about;
+ });
 
 
 
